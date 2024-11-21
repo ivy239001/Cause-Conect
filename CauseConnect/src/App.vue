@@ -5,6 +5,7 @@
 import {ref} from "vue"
 
 import QandA from './views/QandA/QandA.vue'
+import Nav from './components/Nav.vue'
 
 
 </script>
@@ -14,6 +15,9 @@ import QandA from './views/QandA/QandA.vue'
 <!-- 画面に表示される内容を定義します-->
 
 <template>
+  <head>
+    <Nav/>
+  </head>
     <div id="app">
         <!-- ここに他のコンポーネントやHTMLを追加します -->
     </div>
@@ -29,6 +33,7 @@ import QandA from './views/QandA/QandA.vue'
 
     <main>
         <!--<LoginView/>-->
+
         <QandA/>
     </main>
 
