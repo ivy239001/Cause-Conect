@@ -3,13 +3,11 @@
 
 <script setup lang="ts">
 import {ref} from "vue"
+const setsu1 = ref("ここに説明を入れます1")
+const setsu2 = ref("ここに説明を入れます2")
 
-<<<<<<< HEAD
-import QandA from './views/QandA/QandA.vue'
 import Nav from './components/Nav.vue'
-=======
 import FAQ from './views/FAQ/FAQ.vue'
->>>>>>> 72afd2c9ead663f91a94f1ce49eb856c43bc0dce
 
 
 </script>
@@ -19,31 +17,18 @@ import FAQ from './views/FAQ/FAQ.vue'
 <!-- 画面に表示される内容を定義します-->
 
 <template>
-  <head>
-    <Nav/>
-  </head>
-    <div id="app">
-        <!-- ここに他のコンポーネントやHTMLを追加します -->
-    </div>
+    <h2>
+      <!--<LoginView/>-->
+      <FAQ/>
+  </h2>
 
-    <v-container>
-    <p class="default-font">Roboto</p>
-    <p class="default-font">日本語はこんな感じ</p>
-    <p class="extra-font">Rubik Microbe</p>
-    <p class="extra-font2">Patrick Hand</p>
-    <p class="extra-font3">Lato</p>
-    <p class="extra-font4">日本語はこんな感じ</p>
-    </v-container>
+  <h1>{{ setsu1 }}</h1>
 
-    <main>
-        <!--<LoginView/>-->
-<<<<<<< HEAD
+  <div id="app">
+      <!-- ここに他のコンポーネントやHTMLを追加します -->
+  </div>
 
-        <QandA/>
-=======
-        <FAQ/>
->>>>>>> 72afd2c9ead663f91a94f1ce49eb856c43bc0dce
-    </main>
+  <h1>{{ setsu2 }}</h1>
 
 </template>
 
