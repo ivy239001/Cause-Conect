@@ -6,7 +6,7 @@ import {ref} from "vue"
 const setsu1 = ref("ここに説明を入れます1")
 const setsu2 = ref("ここに説明を入れます2")
 
-import Nav from './components/Nav.vue'
+import Navi from './components/Nav.vue'
 import FAQ from './views/FAQ/FAQ.vue'
 
 
@@ -17,8 +17,12 @@ import FAQ from './views/FAQ/FAQ.vue'
 <!-- 画面に表示される内容を定義します-->
 
 <template>
+  <h1>
+    <Navi/>
+  </h1>
     <h2>
       <!--<LoginView/>-->
+
       <FAQ/>
   </h2>
 
