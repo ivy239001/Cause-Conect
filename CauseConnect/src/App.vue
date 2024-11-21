@@ -4,8 +4,12 @@
 <script setup lang="ts">
 import {ref} from "vue"
 
+<<<<<<< HEAD
 import QandA from './views/QandA/QandA.vue'
 import Nav from './components/Nav.vue'
+=======
+import FAQ from './views/FAQ/FAQ.vue'
+>>>>>>> 72afd2c9ead663f91a94f1ce49eb856c43bc0dce
 
 
 </script>
@@ -33,8 +37,12 @@ import Nav from './components/Nav.vue'
 
     <main>
         <!--<LoginView/>-->
+<<<<<<< HEAD
 
         <QandA/>
+=======
+        <FAQ/>
+>>>>>>> 72afd2c9ead663f91a94f1ce49eb856c43bc0dce
     </main>
 
 </template>
