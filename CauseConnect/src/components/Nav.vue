@@ -2,7 +2,7 @@
   <header class="nav">
     <!-- サイトロゴ -->
     <div class="logo" @click="goToHome">
-      <img src="/logo.png" alt="サイトロゴ" />
+      <img src="" alt="サイトロゴ" />
     </div>
 
     <!-- ナビゲーションメニュー -->
