@@ -1,6 +1,6 @@
 <template>
   <header class="nav">
-    <!-- サイトロゴ -->
+    <!-- サイトロゴ（クリックでトップページへ遷移） -->
     <div class="logo" @click="goToHome">
       <img src="" alt="サイトロゴ" />
     </div>
@@ -18,12 +18,12 @@ export default {
   name: "Nav",
   methods: {
     // トップページに遷移
-    goToApp() {
+    goToHome() {
       this.$router.push("/");
     },
     // FAQページに遷移
     goToFAQ() {
-      this.$router.push("/qanda");
+      this.$router.push("/FAQ");
     },
     // ログインページに遷移
     goToLogin() {
@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 /* ナビバー全体のスタイル */
-.navbar {
+.nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
