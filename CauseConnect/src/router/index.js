@@ -1,12 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginView from '../views/LoginView.vue';
 
+// ページコンポーネントのインポート
+import App from './App.vue';
+import FAQ from '../views/FAQ.vue';
+import Login from '../views/LoginView.vue';
+
+// ルート定義
 const routes = [
-  { path: '/login', name: 'Login', component: LoginView },
+  {
+    path: '/',
+    name: 'App',
+    component: App, // トップページ
+  },
+  {
+    path: '/qanda',
+    name: 'FAQ',
+    component: FAQ, // FAQページ
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login, // ログインページ
+  },
 ];
 
+// Vue Routerのインスタンスを作成
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(), // HTML5 Historyモード
   routes,
 });
 
