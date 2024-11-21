@@ -13,7 +13,7 @@ const routes = [
     component: App, // トップページ
   },
   {
-    path: '/qanda',
+    path: '/FAQ',
     name: 'FAQ',
     component: FAQ, // FAQページ
   },
