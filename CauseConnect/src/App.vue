@@ -40,4 +40,7 @@ import FAQ from './views/FAQ/FAQ.vue'
 <!-- CSSのコードを書きます。アプリケーションの見た目を整えます。-->
 
 <style>
+body {
+    font-family: 'Roboto', sans-serif;
+}
 </style>
