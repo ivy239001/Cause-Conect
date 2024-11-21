@@ -1,43 +1,18 @@
-<!-- JavaScriptのコードを書きます-->
-<!-- データやアプリケーションの動作を定義します -->
-
-<script setup lang="ts">
-import {ref} from "vue"
-const setsu1 = ref("ここに説明を入れます1")
-const setsu2 = ref("ここに説明を入れます2")
-
-import Navi from './components/Nav.vue'
-import FAQ from './views/FAQ/FAQ.vue'
-
-
-</script>
-
-
-<!-- HTMLのようなマークアップを記述します -->
-<!-- 画面に表示される内容を定義します-->
-
 <template>
-  <h1>
-    <Navi/>
-  </h1>
-    <h2>
-      <!--<LoginView/>-->
-
-      <FAQ/>
-  </h2>
-
-  <h1>{{ setsu1 }}</h1>
-
-  <div id="app">
-      <!-- ここに他のコンポーネントやHTMLを追加します -->
-  </div>
-
-  <h1>{{ setsu2 }}</h1>
-
-</template>
-
-
-<!-- CSSのコードを書きます。アプリケーションの見た目を整えます。-->
-
-<style>
-</style>
+    <div id="app">
+      <!-- ナビゲーションバー（常に表示） -->
+      <Navi />
+  
+      <!-- ここにページ遷移によって切り替わるコンテンツを表示 -->
+      <router-view></router-view> <!-- 遷移先のコンテンツが表示されます -->
+    </div>
+  </template>
+  
+  <script setup>
+  import Navi from './components/Nav.vue'; // ナビゲーションバーコンポーネントをインポート
+  </script>
+  
+  <style scoped>
+  /* 必要に応じてスタイルを追加 */
+  </style>
+  
