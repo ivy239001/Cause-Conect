@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import {ref} from "vue"
 
-import QandA from './views/QandA/QandA.vue'
+import FAQ from './views/FAQ/FAQ.vue'
 
 
 </script>
@@ -29,7 +29,7 @@ import QandA from './views/QandA/QandA.vue'
 
     <main>
         <!--<LoginView/>-->
-        <QandA/>
+        <FAQ/>
     </main>
 
 </template>
