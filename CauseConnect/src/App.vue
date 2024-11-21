@@ -4,6 +4,8 @@
 <script setup lang="ts">
 import {ref} from "vue"
 
+import QandA from './views/QandA/QandA.vue'
+
 
 </script>
 
