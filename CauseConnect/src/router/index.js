@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // ページコンポーネントのインポート
-import App from './App.vue';
-import FAQ from '../views/FAQ.vue';
-import Login from '../views/LoginView.vue';
+import App from '';
+import FAQ from '';
+import Login from '';
 
 // ルート定義
 const routes = [
