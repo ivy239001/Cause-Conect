@@ -17,22 +17,26 @@ import FAQ from './views/FAQ/FAQ.vue'
 <!-- 画面に表示される内容を定義します-->
 
 <template>
-  <h1>
-    <Navi/>
-  </h1>
-    <h2>
-      <!--<LoginView/>-->
+  <body>
+    <h1 class="kosugi-maru-regular">
+      <Navi/>
+    </h1>
+    <h1 class="kosugi-maru-regular">{{ setsu1 }}</h1>
 
-      <FAQ/>
-  </h2>
+    <h2 class="kosugi-maru-regular">
+        <!--<LoginView/>-->
 
-  <h1>{{ setsu1 }}</h1>
+        <FAQ/>
+    </h2>
+
 
   <div id="app">
-      <!-- ここに他のコンポーネントやHTMLを追加します -->
+    <!-- ここに他のコンポーネントやHTMLを追加します -->
+    <h1 class="kosugi-maru-regular">{{ setsu2 }}</h1>
   </div>
 
-  <h1>{{ setsu2 }}</h1>
+
+</body>
 
 </template>
 
@@ -40,7 +44,11 @@ import FAQ from './views/FAQ/FAQ.vue'
 <!-- CSSのコードを書きます。アプリケーションの見た目を整えます。-->
 
 <style>
-body {
-    font-family: 'Roboto', sans-serif;
+/* Google Fontsの読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
+/* フォントスタイルの適用 */
+.kosugi-maru-regular {
+  font-family: "Kosugi Maru", sans-serif;
 }
 </style>
