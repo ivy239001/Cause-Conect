@@ -7,41 +7,37 @@
 
     <!-- ナビゲーションメニュー -->
     <nav class="nav-links">
-      <button @click="goToFAQ">FAQ</button>
-      <button @click="goToLogin">ログイン</button>
-      <button @click="goToInfo">当サイトについて</button>
+      <router-link to="/FAQ">
+        <button>FAQ</button>
+      </router-link>
+      <router-link to="/login">
+        <button>ログイン</button>
+      </router-link>
+      <router-link to="/info">
+        <button>当サイトについて</button>
+      </router-link>
     </nav>
 
+    <!-- 依頼するボタン -->
+    <div>
+      <button @click="goToToko">依頼する</button>
+    </div>
   </header>
-  <div>
-    <button @click="goToToko">依頼する</button>
-  </div>
 </template>
 
 <script>
 export default {
-  name: "Nav",
+  name: "Navi",
   methods: {
-    // トップページに遷移
+    // ロゴをクリックした時にトップページに遷移
     goToHome() {
       this.$router.push("/");
     },
-    // FAQページに遷移
-    goToFAQ() {
-      this.$router.push("/FAQ");
-    },
-    // ログインページに遷移
-    goToLogin() {
-      this.$router.push("/login");
-    },
-    // 当サイトについてページに遷移
-    goToInfo() {
-      this.$router.push("/info");  // 当サイトについてのページに遷移
-    },
-    goToToko() {
-      this.$router.push("/Toko");  // 当サイトについてのページに遷移
-    },
 
+    // 依頼するボタンをクリックした時にTokoページに遷移
+    goToToko() {
+      this.$router.push("/Toko");
+    },
   },
 };
 </script>
@@ -75,6 +71,20 @@ export default {
 
 .nav-links button:hover {
   text-decoration: underline;
+}
+
+/* 依頼するボタンのスタイル */
+div button {
+  background-color: #f7a400;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+div button:hover {
+  background-color: #ff8c00;
 }
 
 /* レスポンシブデザイン */

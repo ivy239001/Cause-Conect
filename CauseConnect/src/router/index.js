@@ -1,20 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import App from '@/App.vue';
 import FAQ from '@/views/FAQ/FAQ.vue';
 import Login from '@/views/LoginForm/LoginView.vue';
-import Info from '@/views/Info/Info.vue'; // Infoページ
-import Toko from '@/views/Toko/Toko.vue'; // Tokoページ
-import Register from '@/views/Register/Register.vue'; // Tokoページ
-
+import Info from '@/views/Info/Info.vue'; 
+import Toko from '@/views/Toko/Toko.vue'; 
+import Register from '@/views/Register/Register.vue'; 
+import Home from '@/views/Home/Home.vue';  // Home.vue をインポート
 
 const routes = [
-  { path: '/', name: 'App', component: App },
+  { path: '/', name: 'Home', component: Home },  // '/' で Home.vue を表示
   { path: '/FAQ', name: 'FAQ', component: FAQ },
   { path: '/login', name: 'Login', component: Login },
   { path: '/info', name: 'Info', component: Info },
-  { path: '/Toko', name: 'Toko', component: Toko }, // Tokoルート
-  { path: '/Register', name: 'Register', component: Register }, // Tokoルート
-
+  { path: '/Toko', name: 'Toko', component: Toko },
+  { path: '/Register', name: 'Register', component: Register },
 ];
 
 const router = createRouter({
