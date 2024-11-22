@@ -14,6 +14,8 @@ import Navi from './components/Nav.vue'; // ナビゲーションバーコンポ
   </template>
 
   <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
   /* 必要に応じてスタイルを追加 */
   </style>
 
