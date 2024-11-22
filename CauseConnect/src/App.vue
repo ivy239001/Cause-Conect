@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 549d95cd8d0b6c285ea6cebbbca3862f36e17f50
 <script setup>
 import Navi from './components/Nav.vue'; // ナビゲーションバーコンポーネントをインポート
 </script>

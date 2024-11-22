@@ -1,123 +1,121 @@
-<template>
-  <div class="search-container">
-    <h2>検索</h2>
-    
-    <!-- 都道府県のプルダウン -->
-    <div>
-      <label for="prefecture">都道府県</label>
-      <select id="prefecture" v-model="selectedPrefecture">
-        <option value="">選択してください</option>
-        <option v-for="(pref, index) in prefectures" :key="index" :value="pref">{{ pref }}</option>
-      </select>
-    </div>
-
-    <!-- 活動エリアのプルダウン -->
-    <div>
-      <label for="area">活動エリア</label>
-      <select id="area" v-model="selectedArea">
-        <option value="">選択してください</option>
-        <option v-for="(area, index) in areas" :key="index" :value="area">{{ area }}</option>
-      </select>
-    </div>
-
-    <!-- 募集状況のプルダウン -->
-    <div>
-      <label for="status">募集状況</label>
-      <select id="status" v-model="selectedStatus">
-        <option value="">選択してください</option>
-        <option value="募集中">募集中</option>
-        <option value="募集終了">募集終了</option>
-        <option value="すべて">すべて</option>
-      </select>
-    </div>
-
-    <!-- 検索ボタン -->
-    <div>
-      <button @click="handleSearch">検索</button>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   data() {
     return {
-      selectedPrefecture: "",  // 都道府県の選択された値
-      selectedArea: "",        // 活動エリアの選択された値
-      selectedStatus: "",      // 募集状況の選択された値
-      prefectures: ["東京都", "大阪府", "愛知県", "北海道", "福岡県"],  // 都道府県のリスト
-      areas: ["道路", "山", "川", "海", "公園", "その他"]  // 活動エリアのリスト
+      selectedPrefecture: "",
+      selectedArea: "",
+      selectedStatus: "",
+      prefectures: [
+        "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
+        "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
+        "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
+        "岐阜県", "静岡県", "愛知県", "三重県",
+        "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
+        "鳥取県", "島根県", "岡山県", "広島県", "山口県",
+        "徳島県", "香川県", "愛媛県", "高知県",
+        "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
+      ],
+      areas: ["道路", "山", "川", "海", "公園", "その他"]
     };
   },
   methods: {
     handleSearch() {
-      // 検索ボタンが押されたときに実行されるメソッド
       console.log("検索条件:");
-      console.log("都道府県:", this.selectedPrefecture || "未選択");
-      console.log("活動エリア:", this.selectedArea || "未選択");
-      console.log("募集状況:", this.selectedStatus || "未選択");
-
-      // API呼び出しなどの検索処理を追加することができます
-      // 例えば:
-      // this.$http.get('/search', { params: { prefecture: this.selectedPrefecture, area: this.selectedArea, status: this.selectedStatus } })
-      //   .then(response => {
-      //     console.log('検索結果:', response.data);
-      //   });
+      console.log("都道府県:", this.selectedPrefecture);
+      console.log("活動エリア:", this.selectedArea);
+      console.log("募集状況:", this.selectedStatus);
     }
   }
 };
 </script>
 
+<template>
+  <div class="search-container">
+    <div class="search-row">
+      <div class="search-item">
+        <select id="prefecture" v-model="selectedPrefecture">
+          <option value="" disabled selected hidden>都道府県▼</option>
+          <option v-for="(pref, index) in prefectures" :key="index" :value="pref">
+            {{ pref }}
+          </option>
+        </select>
+      </div>
+      <div class="search-item">
+        <select id="area" v-model="selectedArea">
+          <option value="" disabled selected hidden>活動エリア▼</option>
+          <option v-for="(area, index) in areas" :key="index" :value="area">
+            {{ area }}
+          </option>
+        </select>
+      </div>
+      <div class="search-item">
+        <select id="status" v-model="selectedStatus">
+          <option value="" disabled selected hidden>募集状況▼</option>
+          <option value="募集中">募集中</option>
+          <option value="募集終了">募集終了</option>
+          <option value="すべて">すべて</option>
+        </select>
+      </div>
+      <div class="search-item">
+        <button @click="handleSearch">検索</button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 .search-container {
-  max-width: 400px;
+  max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9; /* 背景色を変更して視認性を向上 */
 }
 
 .search-container h2 {
-  text-align: center;
   margin-bottom: 20px;
 }
 
-.search-container label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  display: block;
+.search-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-.search-container select {
-  width: 100%;
+.search-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-item select {
+  width: 150px;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  background-color: #f7a400; /* プルダウン内の背景をオレンジ色に設定 */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem; /* フォントサイズを少し大きく */
+  color: rgb(255, 255, 255); /* テキスト色を白にする */
+  font-weight: bold;
+  appearance: none; /* ブラウザのデフォルトスタイルを無効化 */
 }
 
-.search-container button {
-  width: 100%;
+.search-item select option {
+  background-color: #f7dfb0f3; /* プルダウン項目の背景をオレンジ色に設定 */
+  color: rgb(61, 61, 61); /* 項目のテキスト色を白にする */
+}
+
+.search-item button {
+  width: 150px;
   padding: 0.75rem;
   background-color: #f7a400;
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 1rem;
 }
 
-.search-container button:hover {
+.search-item button:hover {
   background-color: #ff8c00;
-}
-
-.search-container button:active {
-  background-color: #e57e00; /* クリック時の色を少し暗く */
-}
-
-.search-container select, .search-container button {
-  transition: all 0.3s ease;
 }
 </style>

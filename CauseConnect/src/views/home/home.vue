@@ -1,8 +1,11 @@
-<script>
-import Search from '@/components/search.vue'; // エイリアスを使ってインポート
+<script setup>
+import Search from '@/components/search.vue';
+
 </script>
 
+
 <template>
+    <Search/>
   <div>
     <h1>ホームページ</h1>
     <p>ここにはホームページのコンテンツが表示されます。</p>
@@ -11,7 +14,7 @@ import Search from '@/components/search.vue'; // エイリアスを使ってイ�
     <div class="search">
         <p>ここにはComponentが表示されます。</p>
 
-      <Search /> <!-- コンポーネント名を大文字で使用 -->
+      <sch /> <!-- コンポーネント名を大文字で使用 -->
     </div>
   </div> <!-- ルート要素は1つにまとめます -->
 </template>
