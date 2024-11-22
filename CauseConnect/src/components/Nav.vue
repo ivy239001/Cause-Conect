@@ -14,7 +14,7 @@
 
   </header>
   <div>
-    <button @click="goToFAQ">FAQ</button>
+    <button @click="goToToko">依頼する</button>
   </div>
 </template>
 
@@ -38,6 +38,10 @@ export default {
     goToInfo() {
       this.$router.push("/info");  // 当サイトについてのページに遷移
     },
+    goToToko() {
+      this.$router.push("/Toko");  // 当サイトについてのページに遷移
+    },
+
   },
 };
 </script>
