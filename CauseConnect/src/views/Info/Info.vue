@@ -11,8 +11,10 @@ import RegisterButton from '@/components/RegisterButton.vue'
         <div class="content">
           <h1>当サイトについて</h1>
           <p>
-            当サイトは、あなたのために様々なサービスを提供しています。簡単に情報を得られるよう、直感的に使えるインターフェースを心掛けています。
-            地域や自然環境の保護に貢献したいと考える人々が抱える、従来のボランティア活動における課題を解決し、気軽に参加できる社会貢献活動の機会を提供することを目的としています。
+            当サイトは、あなたのために様々なサービスを提供しています。<br>
+            簡単に情報を得られるよう、直感的に使えるインターフェースを心掛けています。<br>
+            地域や自然環境の保護に貢献したいと考える人々が抱える、従来のボランティア活動における課題を解決し、<br>
+            気軽に参加できる社会貢献活動の機会を提供することを目的としています。
           </p>
         </div>
       </div>
@@ -49,12 +51,11 @@ import RegisterButton from '@/components/RegisterButton.vue'
 
   <style scoped>
 
-
-  .info-section{
-    background: url('../../../Design/infoG_O.jpg') no-repeat center center / cover;
-    opacity: 0.8; /* 透明度を %に設定 */
-    z-index: -1; /* コンテンツの後ろに配置 */
-  }
+.info-section {
+  background: url('../../../Design/infoG_O.jpg') no-repeat center center / cover;
+  padding: 10px; /* コンテンツと背景画像の間に余白を設定 */
+  margin-bottom: 0px;
+}
 
   .content {
   position: relative;
@@ -62,8 +63,6 @@ import RegisterButton from '@/components/RegisterButton.vue'
   color: rgb(0, 0, 0);/* テキストを読みやすくするために色を変更 */
   opacity: 1.0; /* 透明度を60%に設定 */
 
-  /*text-shadow:
-    /*1px 1px 0px rgb(255, 255, 255);  /* 下 */
   text-align: center;
   padding: 20px;
 }
