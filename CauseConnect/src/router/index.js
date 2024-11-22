@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from '@/App.vue'; // App.vue をインポート
 import FAQ from '@/views/FAQ/FAQ.vue'; // FAQ ページのインポート
 import LoginView from '@/views/LoginForm/LoginView.vue'; // ログインページのインポート
+import Info from '@/views/Info/Info.vue'
 
 // ルート定義
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginView, // ログインページ
+  },
+  {
+    path: '/Info',
+    name: 'Info',
+    component: Info, // 当サイトについてページ
   },
 ];
 

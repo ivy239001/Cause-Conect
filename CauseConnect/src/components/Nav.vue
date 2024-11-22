@@ -9,7 +9,11 @@
     <nav class="nav-links">
       <button @click="goToFAQ">FAQ</button>
       <button @click="goToLogin">ログイン</button>
+      <button @click="goToInfo">当サイトについて</button>
     </nav>
+    <div>
+      
+    </div>
   </header>
 </template>
 
@@ -28,6 +32,10 @@ export default {
     // ログインページに遷移
     goToLogin() {
       this.$router.push("/login");
+    },
+    // 当サイトについてページに遷移
+    goToInfo() {
+      this.$router.push("/info");  // 当サイトについてのページに遷移
     },
   },
 };
