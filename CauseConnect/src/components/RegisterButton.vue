@@ -11,22 +11,25 @@ const goToRegister = () => {
 </script>
 
 <template>
-    <button class="register-button" @click="goToRegister">新 規 登 録</button>
+    <button class="register-button" @click="goToRegister">新 規 登 録 は こ ち ら</button>
   </template>
 
 
   <style scoped>
   .register-button {
-    background-color: #FCAF17;
-    color: white;
+    background-color: #ffcb62;
+    color: rgb(45, 45, 45);
     border: none;
-    padding: auto ;
+    padding: 15px; /* 適切なパディングを設定 */
+    font-family: "Zen Maru Gothic", serif;
     font-size: 30px;
     cursor: pointer;
     border-radius: 5px;
-  }
+    width: 100%; /* ボタンの幅を画面いっぱいに広げる */
+    box-sizing: border-box; /* パディングやボーダーを含む幅指定 */
+}
 
   .register-button:hover {
-    background-color: #e29e14;
+    background-color: #feb626;
   }
   </style>

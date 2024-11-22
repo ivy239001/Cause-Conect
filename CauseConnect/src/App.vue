@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 549d95cd8d0b6c285ea6cebbbca3862f36e17f50
 <script setup>
 import Navi from './components/Nav.vue'; // ナビゲーションバーコンポーネントをインポート
 </script>
@@ -18,7 +14,7 @@ import Navi from './components/Nav.vue'; // ナビゲーションバーコンポ
   </template>
 
   <style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Zen+Maru+Gothic&display=swap');
 
   html, body {
   margin: 0;
