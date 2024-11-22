@@ -4,6 +4,8 @@ import FAQ from '@/views/FAQ/FAQ.vue';
 import Login from '@/views/LoginForm/LoginView.vue';
 import Info from '@/views/Info/Info.vue'; // Infoページ
 import Toko from '@/views/Toko/Toko.vue'; // Tokoページ
+import Register from '@/views/Register/Register.vue'; // Tokoページ
+
 
 const routes = [
   { path: '/', name: 'App', component: App },
@@ -11,6 +13,8 @@ const routes = [
   { path: '/login', name: 'Login', component: Login },
   { path: '/info', name: 'Info', component: Info },
   { path: '/Toko', name: 'Toko', component: Toko }, // Tokoルート
+  { path: '/Register', name: 'Register', component: Register }, // Tokoルート
+
 ];
 
 const router = createRouter({
