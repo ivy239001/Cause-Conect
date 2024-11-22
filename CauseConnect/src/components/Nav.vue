@@ -11,10 +11,11 @@
       <button @click="goToLogin">ログイン</button>
       <button @click="goToInfo">当サイトについて</button>
     </nav>
-    <div>
-      
-    </div>
+
   </header>
+  <div>
+    <button @click="goToFAQ">FAQ</button>
+  </div>
 </template>
 
 <script>
