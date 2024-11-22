@@ -1,32 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import App from '@/App.vue';
+import FAQ from '@/views/FAQ/FAQ.vue';
+import Login from '@/views/LoginForm/LoginView.vue';
+import Info from '@/views/Info/Info.vue'; // Infoページ
+import Toko from '@/views/Toko/Toko.vue'; // Tokoページ
 
-// ページコンポーネントのインポート
-import App from '@/App.vue'; // App.vue をインポート
-import FAQ from '@/views/FAQ/FAQ.vue'; // FAQ ページのインポート
-import LoginView from '@/views/LoginForm/LoginView.vue'; // ログインページのインポート
-
-// ルート定義
 const routes = [
-  {
-    path: '/',
-    name: 'App',
-    component: App, // トップページ
-  },
-  {
-    path: '/FAQ',
-    name: 'FAQ',
-    component: FAQ, // FAQページ
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: LoginView, // ログインページ
-  },
+  { path: '/', name: 'App', component: App },
+  { path: '/FAQ', name: 'FAQ', component: FAQ },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/info', name: 'Info', component: Info },
+  { path: '/Toko', name: 'Toko', component: Toko }, // Tokoルート
 ];
 
-// Vue Routerのインスタンスを作成
 const router = createRouter({
-  history: createWebHistory(), // HTML5 Historyモード
+  history: createWebHistory(),
   routes,
 });
 

@@ -9,8 +9,13 @@
     <nav class="nav-links">
       <button @click="goToFAQ">FAQ</button>
       <button @click="goToLogin">ログイン</button>
+      <button @click="goToInfo">当サイトについて</button>
     </nav>
+
   </header>
+  <div>
+    <button @click="goToToko">依頼する</button>
+  </div>
 </template>
 
 <script>
@@ -29,6 +34,14 @@ export default {
     goToLogin() {
       this.$router.push("/login");
     },
+    // 当サイトについてページに遷移
+    goToInfo() {
+      this.$router.push("/info");  // 当サイトについてのページに遷移
+    },
+    goToToko() {
+      this.$router.push("/Toko");  // 当サイトについてのページに遷移
+    },
+
   },
 };
 </script>
