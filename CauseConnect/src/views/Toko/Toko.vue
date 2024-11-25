@@ -97,8 +97,9 @@ export default {
     <form @submit.prevent="submitRequest">
       <!-- 依頼ポイント -->
       <div class="form-group">
+
         <label for="request-points">依頼ポイント</label>
-        <textarea id="request-points" v-model="requestPoints" placeholder="依頼の詳細を記入してください" required></textarea>
+        <input id="request-points" v-model="requestPoints" placeholder="100" required>ポイント
       </div>
 
       <!-- 依頼名 -->
@@ -110,15 +111,15 @@ export default {
       <!-- 募集人数 -->
       <div class="form-group">
         <label for="min-people">募集人数</label>
-        <div class="flex">
+        <div class="flex1">
           <select id="min-people" v-model="minPeople">
-            <option v-for="num in 20" :key="'min-' + num" :value="num">{{ num }}</option>
+            <option v-for="num in 20" :key="'min-' + num" :value="num">{{ num }}～</option>
           </select>
-          ～
+
           <select id="max-people" v-model="maxPeople">
-            <option v-for="num in 20" :key="'max-' + num" :value="num">{{ num }}</option>
+            <option v-for="num in 20" :key="'max-' + num" :value="num">{{ num }}人</option>
           </select>
-          人
+
         </div>
       </div>
 
@@ -131,11 +132,11 @@ export default {
       <!-- 活動時間 -->
       <div class="form-group">
         <label for="activity-time">活動時間</label>
-        <div class="flex">
+        <div class="flex2">
           <select id="start-time" v-model="startTime">
-            <option v-for="hour in hours" :key="'start-' + hour" :value="hour">{{ hour }}時</option>
+            <option v-for="hour in hours" :key="'start-' + hour" :value="hour">{{ hour }}時～</option>
           </select>
-          ～
+
           <select id="end-time" v-model="endTime">
             <option v-for="hour in hours" :key="'end-' + hour" :value="hour">{{ hour }}時</option>
           </select>
@@ -153,7 +154,7 @@ export default {
           </select>
 
           <!-- 住所1 -->
-          <input type="text" id="address1" v-model="address1" placeholder="住所1" required />
+          <input type="text" id="address1" v-model="address1" placeholder="市町村" required />
 
           <!-- 住所2 -->
           <input type="text" id="address2" v-model="address2" placeholder="住所2" />
@@ -280,7 +281,22 @@ export default {
 
 .form-group {
   margin-bottom: 20px;
+
+  .flex1{
+    width: 200px;
+    display: flex;
+  }
+  .flex2{
+    width: 200px;
+    display: flex;
+  }
 }
+
+#request-points{
+  width: 50px;
+}
+
+
 
 label {
   display: block;
