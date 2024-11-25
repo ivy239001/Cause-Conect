@@ -7,15 +7,30 @@
 
     <!-- ナビゲーションメニュー -->
     <nav class="nav-links">
-      <router-link to="/FAQ">
-        <button>FAQ</button>
+      <router-link to="/">
+        <button>Home</button>
       </router-link>
+
+      <router-link to="/list">
+        <button>依頼一覧</button>
+      </router-link>
+
+      <router-link to="/Register">
+        <button>新規登録</button>
+      </router-link>
+
       <router-link to="/login">
         <button>ログイン</button>
       </router-link>
+
       <router-link to="/info">
         <button>当サイトについて</button>
       </router-link>
+
+      <router-link to="/FAQ">
+        <button>FAQ</button>
+      </router-link>
+
     </nav>
 
     <!-- 依頼するボタン -->

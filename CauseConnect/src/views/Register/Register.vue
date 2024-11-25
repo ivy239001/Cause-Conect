@@ -2,8 +2,6 @@
     <div class="register-page">
       <h1>新規登録</h1>
       <form>
-        <label for="username">ユーザー名:</label>
-        <input type="text" id="username" v-model="username" placeholder="ユーザー名を入力" />
 
         <label for="email">メールアドレス:</label>
         <input type="email" id="email" v-model="email" placeholder="メールアドレスを入力" />
@@ -19,7 +17,6 @@
   <script setup>
   import { ref } from 'vue'
 
-  const username = ref('')
   const email = ref('')
   const password = ref('')
   </script>

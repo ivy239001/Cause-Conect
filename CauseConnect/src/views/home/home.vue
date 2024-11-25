@@ -23,7 +23,7 @@ const searchRequests = () => {
     <Search v-model:searchQuery="searchQuery" @search="searchRequests" />
     <ImageSlide/>
     <Japan/>
-    
+    <ImageSlide/>
     <div>
       <h1>ホームページ</h1>
       <p>ここにはホームページのコンテンツが表示されます。</p>

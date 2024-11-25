@@ -31,7 +31,7 @@ export default {
       images: [sample1, sample2, sample3, sample4, sample5], // 5枚の画像を配列に追加
       currentSlide: 0, // 最初のスライドを0（最初の画像）に設定
       slideWidth: 600, // 画像の幅（初期値）
-      imageGap: 30, // 画像間の隙間
+      imageGap: 300, // 画像間の隙間
     };
   },
   computed: {
@@ -78,7 +78,6 @@ export default {
 .slide-container {
   position: relative;
   width: 100%;
-  /* max-width: 600px; */
   margin: 0 auto;
   overflow: hidden;
 }
@@ -91,7 +90,7 @@ export default {
 
 .slide-image {
   height: auto; /* 画像の高さは自動調整 */
-  margin-right: 50px; /* 画像間の隙間 */
+  margin-right: 30px; /* 画像間の隙間 */
 }
 
 button {
