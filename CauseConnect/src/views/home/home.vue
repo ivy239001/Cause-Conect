@@ -1,20 +1,22 @@
 <script setup>
 import Search from '@/components/search.vue';
 import Japan from '@/components/japan.vue';
-import Slide from '@/components/Slide.vue'; // Slide コンポーネントのインポート
+import ImageSlide from '@/components/ImageSlide.vue';
 
 </script>
 
 
 <template>
-    <Search/>
-    <Japan/>
-    <Slide/>
   <div>
-    <h1>ホームページ</h1>
-    <p>ここにはホームページのコンテンツが表示されます。</p>
+    <Search/>
+    <ImageSlide/>
 
-  </div> <!-- ルート要素は1つにまとめます -->
+    <Japan/>
+    <div>
+      <h1>ホームページ</h1>
+      <p>ここにはホームページのコンテンツが表示されます。</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
