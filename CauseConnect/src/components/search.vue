@@ -1,34 +1,3 @@
-<script>
-export default {
-  data() {
-    return {
-      selectedPrefecture: "",
-      selectedArea: "",
-      selectedStatus: "",
-      prefectures: [
-        "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
-        "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
-        "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
-        "岐阜県", "静岡県", "愛知県", "三重県",
-        "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
-        "鳥取県", "島根県", "岡山県", "広島県", "山口県",
-        "徳島県", "香川県", "愛媛県", "高知県",
-        "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
-      ],
-      areas: ["道路", "山", "川", "海", "公園", "その他"]
-    };
-  },
-  methods: {
-    handleSearch() {
-      console.log("検索条件:");
-      console.log("都道府県:", this.selectedPrefecture);
-      console.log("活動エリア:", this.selectedArea);
-      console.log("募集状況:", this.selectedStatus);
-    }
-  }
-};
-</script>
-
 <template>
   <div class="search-container">
     <div class="search-row">
@@ -57,11 +26,46 @@ export default {
         </select>
       </div>
       <div class="search-item">
-        <button @click="handleSearch">検索</button>
+        <button @click="navigateToList">検索</button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectedPrefecture: "",
+      selectedArea: "",
+      selectedStatus: "",
+      prefectures: [
+        "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
+        "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
+        "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
+        "岐阜県", "静岡県", "愛知県", "三重県",
+        "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
+        "鳥取県", "島根県", "岡山県", "広島県", "山口県",
+        "徳島県", "香川県", "愛媛県", "高知県",
+        "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
+      ],
+      areas: ["道路", "山", "川", "海", "公園", "その他"]
+    };
+  },
+  methods: {
+    navigateToList() {
+      const query = {
+        prefecture: this.selectedPrefecture || null,
+        area: this.selectedArea || null,
+        status: this.selectedStatus || null,
+      };
+
+      // List.vue にクエリパラメータ付きで遷移
+      this.$router.push({ name: "List", query });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .search-container {
@@ -93,16 +97,21 @@ export default {
   font-family: "Zen Maru Gothic", serif;
   width: 150px;
   padding: 0.5rem;
-  background-color: #f7a400; /* プルダウン内の背景をオレンジ色に設定 */
+  background-color: #f7a400;
+  /* プルダウン内の背景をオレンジ色に設定 */
   border: 1px solid #ccc;
   border-radius: 4px;
-  color: rgb(255, 255, 255); /* テキスト色を白にする */
-  appearance: none; /* ブラウザのデフォルトスタイルを無効化 */
+  color: rgb(255, 255, 255);
+  /* テキスト色を白にする */
+  appearance: none;
+  /* ブラウザのデフォルトスタイルを無効化 */
 }
 
 .search-item select option {
-  background-color: #f7dfb0f3; /* プルダウン項目の背景をオレンジ色に設定 */
-  color: rgb(61, 61, 61); /* 項目のテキスト色を白にする */
+  background-color: #f7dfb0f3;
+  /* プルダウン項目の背景をオレンジ色に設定 */
+  color: rgb(61, 61, 61);
+  /* 項目のテキスト色を白にする */
 }
 
 .search-item button {
