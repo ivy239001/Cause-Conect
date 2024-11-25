@@ -2,7 +2,13 @@
   <div class="slide-container">
     <!-- スライド表示のための画像のラッパー -->
     <div class="image-wrapper" :style="imageWrapperStyle">
-      <img v-for="(image, index) in images" :key="index" :src="image" alt="スライド画像" class="slide-image" />
+      <img
+        v-for="(image, index) in images"
+        :key="index"
+        :src="image"
+        alt="スライド画像"
+        class="slide-image"
+        :style="{ width: slideWidth + 'px' }" /> <!-- 画像の幅をスライド幅に合わせる -->
     </div>
 
     <!-- 左右スクロールボタン -->
@@ -23,7 +29,7 @@ export default {
   data() {
     return {
       images: [sample1, sample2, sample3, sample4, sample5], // 5枚の画像を配列に追加
-      currentSlide: 2, // 最初のスライドを中央に設定 (index 2: sample3)
+      currentSlide: 0, // 最初のスライドを0（最初の画像）に設定
       slideWidth: 600, // 画像の幅（初期値）
       imageGap: 30, // 画像間の隙間
     };
@@ -41,10 +47,12 @@ export default {
   methods: {
     // 左へスライド
     prevSlide() {
+      // 現在のスライドを減算し、循環させる
       this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
     },
     // 右へスライド
     nextSlide() {
+      // 現在のスライドを加算し、循環させる
       this.currentSlide = (this.currentSlide + 1) % this.images.length;
     },
     // 画像のサイズを動的に設定
@@ -70,7 +78,7 @@ export default {
 .slide-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
   overflow: hidden;
 }
@@ -82,9 +90,8 @@ export default {
 }
 
 .slide-image {
-  width: 100%; /* 画像の幅を親要素に合わせて100% */
-  height: auto;
-  margin-right: 30px; /* 画像間の隙間 */
+  height: auto; /* 画像の高さは自動調整 */
+  margin-right: 50px; /* 画像間の隙間 */
 }
 
 button {

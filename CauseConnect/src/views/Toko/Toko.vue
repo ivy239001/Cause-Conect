@@ -98,7 +98,7 @@ export default {
       <!-- 依頼ポイント -->
       <div class="form-group">
         <label for="request-points">依頼ポイント</label>
-        <textarea id="request-points" v-model="requestPoints" placeholder="依頼の詳細を記入してください" required></textarea>
+        <input id="request-points" v-model="requestPoints" placeholder="依頼の詳細を記入してください" required/>
       </div>
 
       <!-- 依頼名 -->

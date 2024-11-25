@@ -3,7 +3,7 @@ import { ref } from 'vue';  // refをインポート
 import { useRouter } from 'vue-router';  // vue-routerをインポート
 import Search from '@/components/search.vue';
 import Japan from '@/components/japan.vue';
-import ImageSlide from '@/components/ImageSlide.vue';
+import ImageSlide from '@/views/Home/Component/ImageSlide.vue';
 
 // 検索クエリを保持するためのref
 const searchQuery = ref('');
