@@ -90,13 +90,13 @@ export default {
 }
 
 .search-item select {
+  font-family: "Zen Maru Gothic", serif;
   width: 150px;
   padding: 0.5rem;
   background-color: #f7a400; /* プルダウン内の背景をオレンジ色に設定 */
   border: 1px solid #ccc;
   border-radius: 4px;
   color: rgb(255, 255, 255); /* テキスト色を白にする */
-  font-weight: bold;
   appearance: none; /* ブラウザのデフォルトスタイルを無効化 */
 }
 
@@ -106,6 +106,7 @@ export default {
 }
 
 .search-item button {
+  font-family: "Zen Maru Gothic", serif;
   width: 150px;
   padding: 0.75rem;
   background-color: #f7a400;

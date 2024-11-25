@@ -7,3 +7,5 @@
 フォントカラー及び白抜き文字バックグラウンドカラー
 #333
 
+フォント文字
+font-family: "Zen Maru Gothic", serif;

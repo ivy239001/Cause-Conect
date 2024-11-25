@@ -61,6 +61,8 @@ export default {
 
 /* ナビゲーションリンクのスタイル */
 .nav-links button {
+  font-family: "Zen Maru Gothic", serif;
+
   background: none;
   border: none;
   color: white;
@@ -75,6 +77,8 @@ export default {
 
 /* 依頼するボタンのスタイル */
 div button {
+  font-family: "Zen Maru Gothic", serif;
+
   background-color: #f7a400;
   border: none;
   color: white;
