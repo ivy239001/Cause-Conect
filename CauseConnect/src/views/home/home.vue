@@ -1,6 +1,7 @@
 <script setup>
 import Search from '@/components/search.vue';
 import Japan from '@/components/japan.vue';
+import Slide from '@/components/Slide.vue'; // Slide コンポーネントのインポート
 
 </script>
 
@@ -8,6 +9,7 @@ import Japan from '@/components/japan.vue';
 <template>
     <Search/>
     <Japan/>
+    <Slide/>
   <div>
     <h1>ホームページ</h1>
     <p>ここにはホームページのコンテンツが表示されます。</p>
