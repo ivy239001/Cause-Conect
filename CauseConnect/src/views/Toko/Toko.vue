@@ -13,8 +13,9 @@ export default {
       minPeople: 1,
       maxPeople: 20,
       activityDate: '',
-      startTime: '0',
-      endTime: '23',
+      hours: Array.from({ length: 24 }, (_, i) => i), // 0～23の時間配列
+      startTime: '0', // 開始時刻（デフォルト0時）
+      endTime: '23', // 終了時刻（デフォルト23時）
       prefecture: '',
       address1: '',
       address2: '',
@@ -97,22 +98,13 @@ export default {
       <!-- 依頼ポイント -->
       <div class="form-group">
         <label for="request-points">依頼ポイント</label>
-        <textarea
-          id="request-points"
-          v-model="requestPoints"
-          placeholder="依頼の詳細を記入してください"
-          required></textarea>
+        <textarea id="request-points" v-model="requestPoints" placeholder="依頼の詳細を記入してください" required></textarea>
       </div>
 
       <!-- 依頼名 -->
       <div class="form-group">
         <label for="request-name">依頼名</label>
-        <input
-          type="text"
-          id="request-name"
-          v-model="requestName"
-          placeholder="依頼の名前を入力してください"
-          required />
+        <input type="text" id="request-name" v-model="requestName" placeholder="依頼の名前を入力してください" required />
       </div>
 
       <!-- 募集人数 -->
@@ -133,11 +125,7 @@ export default {
       <!-- 活動日 -->
       <div class="form-group">
         <label for="activity-date">活動日</label>
-        <input
-          type="date"
-          id="activity-date"
-          v-model="activityDate"
-          required />
+        <input type="date" id="activity-date" v-model="activityDate" required />
       </div>
 
       <!-- 活動時間 -->
@@ -165,19 +153,10 @@ export default {
           </select>
 
           <!-- 住所1 -->
-          <input
-            type="text"
-            id="address1"
-            v-model="address1"
-            placeholder="住所1"
-            required />
+          <input type="text" id="address1" v-model="address1" placeholder="住所1" required />
 
           <!-- 住所2 -->
-          <input
-            type="text"
-            id="address2"
-            v-model="address2"
-            placeholder="住所2" />
+          <input type="text" id="address2" v-model="address2" placeholder="住所2" />
         </div>
       </div>
 
@@ -186,17 +165,11 @@ export default {
         <label class="inline-label">必要備品</label>
         <div class="radio-group">
           <label class="radio-label">
-            <input
-              type="radio"
-              value="有"
-              v-model="equipmentNeeded" />
+            <input type="radio" value="有" v-model="equipmentNeeded" />
             有
           </label>
           <label class="radio-label">
-            <input
-              type="radio"
-              value="無"
-              v-model="equipmentNeeded" />
+            <input type="radio" value="無" v-model="equipmentNeeded" />
             無
           </label>
         </div>
@@ -219,7 +192,8 @@ export default {
       <div class="form-group">
         <label>活動テーマ</label>
         <div class="flex">
-          <label class="checkbox-label"><input type="checkbox" v-model="activityTheme.regionalBeautification" /> 地域美化</label>
+          <label class="checkbox-label"><input type="checkbox" v-model="activityTheme.regionalBeautification" />
+            地域美化</label>
         </div>
       </div>
 
@@ -248,66 +222,41 @@ export default {
       <!-- 依頼達成条件 -->
       <div class="form-group">
         <label for="request-condition">依頼達成条件</label>
-        <textarea
-          id="request-condition"
-          v-model="requestCondition"
-          placeholder="依頼を達成するための条件を記入してください"
+        <textarea id="request-condition" v-model="requestCondition" placeholder="依頼を達成するための条件を記入してください"
           rows="4"></textarea>
       </div>
 
       <!-- エリア詳細（フリー入力） -->
       <div class="form-group">
         <label for="area-details">エリア詳細</label>
-        <textarea
-          id="area-details"
-          v-model="areaDetails"
-          placeholder="エリアに関する詳細情報を記入してください"
-          rows="4"></textarea>
+        <textarea id="area-details" v-model="areaDetails" placeholder="エリアに関する詳細情報を記入してください" rows="4"></textarea>
       </div>
 
       <!-- 基本情報（フリー入力） -->
       <div class="form-group">
         <label for="basic-info">基本情報</label>
-        <textarea
-          id="basic-info"
-          v-model="basicInfo"
-          placeholder="依頼の背景や基本情報を記入してください（例：活動目的や概要など）"
-          rows="6"
+        <textarea id="basic-info" v-model="basicInfo" placeholder="依頼の背景や基本情報を記入してください（例：活動目的や概要など）" rows="6"
           required></textarea>
       </div>
 
       <!-- 写真アップロード1 -->
       <div class="form-group">
         <label for="photo-upload-1">写真をアップロード1</label>
-        <input
-          type="file"
-          id="photo-upload-1"
-          @change="handleFileUpload1"
-          accept="image/*"
-        />
+        <input type="file" id="photo-upload-1" @change="handleFileUpload1" accept="image/*" />
       </div>
 
       <!-- 依頼詳細（フリー入力） -->
       <div class="form-group">
         <label for="request-details">依頼詳細</label>
-        <textarea
-          id="request-details"
-          v-model="requestDetails"
-          placeholder="依頼内容の詳細を記入してください"
-          rows="4"></textarea>
+        <textarea id="request-details" v-model="requestDetails" placeholder="依頼内容の詳細を記入してください" rows="4"></textarea>
       </div>
 
       <!-- 写真アップロード2 -->
       <div class="form-group">
         <label for="photo-upload-2">写真をアップロード2</label>
-        <input
-          type="file"
-          id="photo-upload-2"
-          @change="handleFileUpload2"
-          accept="image/*"
-        />
+        <input type="file" id="photo-upload-2" @change="handleFileUpload2" accept="image/*" />
       </div>
-      <MapURL/>
+      <MapURL />
 
       <!-- 送信ボタン -->
       <button type="submit">投稿する</button>
@@ -339,7 +288,9 @@ label {
   margin-bottom: 5px;
 }
 
-textarea, input, select {
+textarea,
+input,
+select {
   font-family: "Zen Maru Gothic", serif;
   width: 100%;
   padding: 10px;
@@ -349,13 +300,15 @@ textarea, input, select {
   border-radius: 5px;
 }
 
-.radio-group, .checkbox-group {
+.radio-group,
+.checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.radio-label, .checkbox-label {
+.radio-label,
+.checkbox-label {
   font-size: 14px;
   display: flex;
   align-items: center;
