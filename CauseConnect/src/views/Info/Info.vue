@@ -61,7 +61,7 @@ import RegisterButton from '@/components/RegisterButton.vue'
   font-family: "Zen Maru Gothic", serif;
   position: relative;
   z-index: 1; /* 背景より前面に表示 */
-  color: rgb(52, 52, 52);/* テキストを読みやすくするために色を変更 */
+  color: #333;/* テキストを読みやすくするために色を変更 */
   text-shadow: 1px 1px 2px rgb(255, 255, 255); /* フォントに影をつける */
   text-align: center;
   padding: 20px;
