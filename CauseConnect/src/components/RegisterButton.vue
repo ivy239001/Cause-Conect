@@ -17,7 +17,7 @@ const goToRegister = () => {
 
   <style scoped>
   .register-button {
-    background-color: #ffcb62;
+    background-color: #FCAF17;
     color: rgb(45, 45, 45);
     border: none;
     padding: 15px; /* 適切なパディングを設定 */
@@ -30,6 +30,6 @@ const goToRegister = () => {
 }
 
   .register-button:hover {
-    background-color: #feb626;
+    background-color: #e69a00;
   }
   </style>

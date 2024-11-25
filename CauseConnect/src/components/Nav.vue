@@ -2,7 +2,7 @@
   <header class="nav">
     <!-- サイトロゴ（クリックでトップページへ遷移） -->
     <div class="logo" @click="goToHome">
-      <img src="" alt="サイトロゴ" />
+      <img src="../assets/CC_logo.png"/>
     </div>
 
     <!-- ナビゲーションメニュー -->
