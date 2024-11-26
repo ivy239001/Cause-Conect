@@ -1,5 +1,4 @@
 <script>
-import buttonEF from './buttonEF.vue'; // ナビゲーションバーコンポーネントをインポート
 
 export default {
   data() {
