@@ -1,4 +1,6 @@
 <script>
+import buttonEF from './buttonEF.vue'; // ナビゲーションバーコンポーネントをインポート
+
 export default {
   data() {
     return {
@@ -98,7 +100,7 @@ export default {
     position: relative;
     width: 100%;
     max-width: 1000px;
-    margin-left: 300px;
+    margin-left: 100px;
     margin-top: 20px;
     text-align: left;
   }
@@ -150,11 +152,31 @@ export default {
     margin: 2px; /* ボタン間の間隔を縮める */
     cursor: pointer;
     font-size: 20px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 5px 5px 0 #ff8c00;
+
+
   }
 
-  .pref-button:hover {
-    background-color: #ffd6a4;
-  }
+  .pref-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  display: block;
+  background: #ff8c00;
+  transition: 0.3s;
+  left: 0;
+}
+
+.pref-button:hover {
+  color: #333;
+  background-color: #ff8c00;
+  box-shadow: 0 0 0;
+  transform: translate(5px, 5px);
+}
+
 
   /* 地域ごとの位置調整 */
   .region-hokkaido {

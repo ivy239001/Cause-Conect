@@ -1,3 +1,69 @@
+<script>
+import { onMounted, onBeforeUnmount } from 'vue';
+import sample1 from '@/assets/img/sample1.jpg';
+import sample2 from '@/assets/img/sample1.jpg';
+import sample3 from '@/assets/img/sample1.jpg';
+import sample4 from '@/assets/img/sample1.jpg';
+import sample5 from '@/assets/img/sample2.jpg';
+
+export default {
+  name: "ImageSlide",
+  data() {
+    return {
+      images: [sample1, sample2, sample3, sample4, sample5],
+      currentSlide: 0,
+      slideWidth: 600,
+      imageGap: 300,
+      slideWidthWithGap: 900,
+      intervalId: null, // スライドの自動進行ID
+    };
+  },
+
+  computed: {
+    imageWrapperStyle() {
+      return {
+        transform: `translateX(-${this.currentSlide * this.slideWidthWithGap}px)`,
+        transition: 'transform 0.5s ease-in-out',
+      };
+    },
+  },
+  methods: {
+    prevSlide() {
+      this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
+    },
+    nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.images.length;
+    },
+    setImageWidth() {
+      this.slideWidth = window.innerWidth < 600 ? window.innerWidth - 40 : 600;
+      this.slideWidthWithGap = this.slideWidth + this.imageGap;
+    },
+    autoSlide() {
+      this.intervalId = setInterval(this.nextSlide, 3000);
+    },
+    stopAutoSlide() {
+      clearInterval(this.intervalId);
+    },
+  },
+  watch: {
+    slideWidth(newWidth) {
+      this.slideWidthWithGap = newWidth + this.imageGap;
+    },
+  },
+  onMounted() {
+    this.setImageWidth();
+    window.addEventListener('resize', this.setImageWidth);
+    this.autoSlide();
+  },
+  onBeforeUnmount() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+    window.removeEventListener('resize', this.setImageWidth);
+  },
+};
+</script>
+
 <template>
   <div class="slide-container">
     <!-- スライド表示のための画像のラッパー -->
@@ -12,67 +78,11 @@
     </div>
 
     <!-- 左右スクロールボタン -->
-    <button class="prev" @click="prevSlide">←</button>
-    <button class="next" @click="nextSlide">→</button>
+    <button class="prev" @click="prevSlide" aria-label="Previous Slide">←</button>
+    <button class="next" @click="nextSlide" aria-label="Next Slide">→</button>
   </div>
 </template>
 
-<script>
-import sample1 from '@/assets/img/sample1.jpg'; // 画像1をインポート
-import sample2 from '@/assets/img/sample2.jpg'; // 画像2をインポート
-import sample3 from '@/assets/img/sample3.jpg'; // 画像3をインポート
-import sample4 from '@/assets/img/sample4.jpg'; // 画像4をインポート
-import sample5 from '@/assets/img/sample5.jpg'; // 画像5をインポート
-
-export default {
-  name: "ImageSlide",
-  data() {
-    return {
-      images: [sample1, sample2, sample3, sample4, sample5], // 5枚の画像を配列に追加
-      currentSlide: 0, // 最初のスライドを0（最初の画像）に設定
-      slideWidth: 600, // 画像の幅（初期値）
-      imageGap: 300, // 画像間の隙間
-    };
-  },
-  computed: {
-    // 画像をスライドさせるためのスタイル
-    imageWrapperStyle() {
-      const slideWidthWithGap = this.slideWidth + this.imageGap; // 画像の幅と隙間を合計
-      return {
-        transform: `translateX(-${this.currentSlide * slideWidthWithGap}px)`, // 現在のスライド位置を反映
-        transition: 'transform 0.5s ease-in-out', // スライドの移動を滑らかに
-      };
-    },
-  },
-  methods: {
-    // 左へスライド
-    prevSlide() {
-      // 現在のスライドを減算し、循環させる
-      this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
-    },
-    // 右へスライド
-    nextSlide() {
-      // 現在のスライドを加算し、循環させる
-      this.currentSlide = (this.currentSlide + 1) % this.images.length;
-    },
-    // 画像のサイズを動的に設定
-    setImageWidth() {
-      // 画面の幅に合わせて画像の幅を設定（例えば、600pxが基準）
-      this.slideWidth = window.innerWidth < 600 ? window.innerWidth - 40 : 600; // 画面幅が600pxより小さければ自動調整
-    },
-  },
-  mounted() {
-    // コンポーネントがマウントされたときに画像の幅を設定
-    this.setImageWidth();
-    // ウィンドウリサイズ時にも画像の幅を更新
-    window.addEventListener('resize', this.setImageWidth);
-  },
-  beforeDestroy() {
-    // リサイズイベントの解除
-    window.removeEventListener('resize', this.setImageWidth);
-  }
-};
-</script>
 
 <style scoped>
 .slide-container {
@@ -84,13 +94,15 @@ export default {
 
 .image-wrapper {
   display: flex;
-  width: 100%;
   transition: transform 0.5s ease-in-out;
 }
 
 .slide-image {
-  height: auto; /* 画像の高さは自動調整 */
-  margin-right: 30px; /* 画像間の隙間 */
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  margin-right: 30px;
+  border-radius: 10px;
 }
 
 button {
@@ -103,7 +115,7 @@ button {
   font-size: 24px;
   padding: 10px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
 }
 
 button:hover {
