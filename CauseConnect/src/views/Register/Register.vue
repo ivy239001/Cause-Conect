@@ -52,12 +52,20 @@ const registerUser = async () => {
 
 <style scoped>
 .register-page {
+  font-family: "Zen Maru Gothic", serif;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
 }
+#email,
+#password,
+#password_confirmation{
+  font-family: "Zen Maru Gothic", serif;
+}
+
+
 
 h1 {
   text-align: center;
@@ -73,7 +81,7 @@ label {
 }
 
 input {
-  padding: 10px;
+  padding: 1px;
   margin-top: 5px;
   margin-bottom: 15px;
   border-radius: 4px;
@@ -81,17 +89,36 @@ input {
 }
 
 button {
+  font-family: "Zen Maru Gothic", serif;
   background-color: #ffcb60;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 20px 20px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 5px 5px 0 #ff8c00;
+
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  display: block;
+  background: #ff8c00;
+  transition: 0.3s;
+  left: 0;
 }
 
 button:hover {
-  background-color: #feb626;
+  color: #333;
+  background-color: #ff8c00;
+  box-shadow: 0 0 0;
+  transform: translate(5px, 5px);
 }
 
 p {
