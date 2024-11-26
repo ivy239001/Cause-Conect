@@ -2,7 +2,6 @@
   <div class="register-page">
     <h1>新規登録</h1>
     <form @submit.prevent="registerUser">
-
       <label for="email">メールアドレス:</label>
       <input type="email" id="email" v-model="email" placeholder="メールアドレスを入力" />
 
@@ -16,29 +15,34 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
+import { ref } from 'vue';
+import axios from 'axios'; // axiosのインポート
 
-const email = ref('')
-const password = ref('')
-const message = ref('')
+// 入力された値を保存するためのref
+const email = ref('');
+const password = ref('');
+const message = ref('');
 
+// 登録処理
 const registerUser = async () => {
   try {
+    // バックエンドにPOSTリクエストを送信
     const response = await axios.post('/register', {
       email: email.value,
-      password: password.value
-    })
+      password: password.value,
+    });
 
-    message.value = response.data.message
+    // 成功した場合、レスポンスからメッセージを受け取り表示
+    message.value = response.data.message;
   } catch (error) {
+    // エラーハンドリング
     if (error.response && error.response.data) {
-      message.value = error.response.data.message || '登録に失敗しました'
+      message.value = error.response.data.message || '登録に失敗しました';
     } else {
-      message.value = 'サーバーエラーが発生しました'
+      message.value = 'サーバーエラーが発生しました';
     }
   }
-}
+};
 </script>
 
 <style scoped>
