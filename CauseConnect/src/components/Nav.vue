@@ -23,6 +23,11 @@
         <button>ログイン</button>
       </router-link>
 
+      <router-link to="/mypage">
+        <button>マイページ</button>
+      </router-link>
+
+
       <router-link to="/info">
         <button>当サイトについて</button>
       </router-link>

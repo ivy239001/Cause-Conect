@@ -1,102 +1,146 @@
+<script setup>
+import { reactive, ref } from "vue";
+import axios from "axios";
+import PhotoUploader from './Component/PhotoUploader.vue';
+// ユーザー情報を保持
+const user = reactive({
+  password: "",
+  nickname: "",
+  name: "",
+  kana: "",
+  birth: "",
+  sex: "",
+  tel: "",
+  email: "",
+  intro: "",
+});
+
+// フィードバック用メッセージ
+const message = ref("");
+
+// フォーム送信処理
+const updateProfile = async () => {
+  try {
+    // サーバーに送信するデータ
+    const payload = { ...user };
+
+    // API リクエスト送信
+    const response = await axios.post("/mypage/update", payload);
+
+    // 成功時のメッセージ
+    message.value = response.data.message || "プロフィールを更新しました。";
+  } catch (error) {
+    console.error("プロフィールの更新に失敗しました", error);
+    message.value = "プロフィールの更新に失敗しました。";
+  }
+};
+</script>
+
 <template>
+    <PhotoUploader/>
     <div class="mypage-container">
-      <h1>マイページ</h1>
-      <form @submit.prevent="updateUser">
-        <!-- ユーザー情報フォーム -->
-        <div v-for="(value, key) in userForm" :key="key" class="form-group">
-          <label :for="key">{{ labels[key] }}</label>
+      <h1>マイページ - 会員情報編集</h1>
+      <form @submit.prevent="updateProfile">
+        <!-- パスワード -->
+        <div class="form-group">
+          <label for="password">パスワード</label>
           <input
-            v-if="key !== 'icon'"
-            :type="key === 'password' ? 'password' : 'text'"
-            :id="key"
-            v-model="userForm[key]"
-            :placeholder="labels[key]"
+            type="password"
+            id="password"
+            v-model="user.password"
+            placeholder="新しいパスワードを入力してください"
           />
-          <!-- アイコンアップロード -->
-          <input v-else type="file" id="icon" @change="handleIconUpload" />
+        </div>
+  
+        <!-- ニックネーム -->
+        <div class="form-group">
+          <label for="nickname">ニックネーム</label>
+          <input
+            type="text"
+            id="nickname"
+            v-model="user.nickname"
+            placeholder="ニックネームを入力してください"
+          />
+        </div>
+  
+        <!-- 名前 -->
+        <div class="form-group">
+          <label for="name">名前</label>
+          <input
+            type="text"
+            id="name"
+            v-model="user.name"
+            placeholder="名前を入力してください"
+          />
+        </div>
+  
+        <!-- カナ -->
+        <div class="form-group">
+          <label for="kana">カナ</label>
+          <input
+            type="text"
+            id="kana"
+            v-model="user.kana"
+            placeholder="カナを入力してください"
+          />
+        </div>
+  
+        <!-- 生年月日 -->
+        <div class="form-group">
+          <label for="birth">生年月日</label>
+          <input type="date" id="birth" v-model="user.birth" />
+        </div>
+  
+        <!-- 性別 -->
+        <div class="form-group">
+          <label for="sex">性別</label>
+          <select id="sex" v-model="user.sex">
+            <option value="" disabled>性別を選択してください</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+  
+        <!-- 電話番号 -->
+        <div class="form-group">
+          <label for="tel">電話番号</label>
+          <input
+            type="tel"
+            id="tel"
+            v-model="user.tel"
+            placeholder="電話番号を入力してください"
+          />
+        </div>
+  
+        <!-- メールアドレス -->
+        <div class="form-group">
+          <label for="email">メールアドレス</label>
+          <input
+            type="email"
+            id="email"
+            v-model="user.email"
+            placeholder="メールアドレスを入力してください"
+          />
+        </div>
+  
+        <!-- 自己紹介 -->
+        <div class="form-group">
+          <label for="intro">自己紹介</label>
+          <textarea
+            id="intro"
+            v-model="user.intro"
+            placeholder="自己紹介を記入してください"
+            rows="5"
+          ></textarea>
         </div>
   
         <!-- 更新ボタン -->
-        <button type="submit">更新</button>
+        <button type="submit">更新する</button>
       </form>
       <p v-if="message" class="message">{{ message }}</p>
     </div>
   </template>
-  
-  <script setup>
-  import { reactive, ref, onMounted } from 'vue';
-  import axios from 'axios';
-  
-  // データとラベル定義
-  const userForm = reactive({
-    nickname: '',
-    name: '',
-    kana: '',
-    birth: '',
-    sex: '',
-    tel: '',
-    email: '',
-    intro: '',
-    icon: null, // ファイル
-  });
-  const labels = {
-    nickname: 'ニックネーム',
-    name: '名前',
-    kana: 'カナ',
-    birth: '生年月日',
-    sex: '性別',
-    tel: '電話番号',
-    email: 'メールアドレス',
-    intro: '自己紹介',
-    icon: '写真',
-  };
-  
-  // フィードバック用メッセージ
-  const message = ref('');
-  
-  // アイコンアップロード処理
-  const handleIconUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      userForm.icon = file;
-    }
-  };
-  
-  // ユーザー情報を取得
-  const fetchUser = async (id) => {
-    try {
-      const response = await axios.get(`/user/${id}`);
-      Object.assign(userForm, response.data); // データを反映
-    } catch (error) {
-      console.error('ユーザー情報の取得に失敗しました', error);
-    }
-  };
-  
-  // ユーザー情報を更新
-  const updateUser = async () => {
-    try {
-      const formData = new FormData();
-      Object.entries(userForm).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
-  
-      const response = await axios.post('/user/update', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      message.value = response.data.message;
-    } catch (error) {
-      console.error('更新に失敗しました', error);
-      message.value = '更新に失敗しました';
-    }
-  };
-  
-  // 初期化処理
-  onMounted(() => {
-    const userId = 1; // 仮のユーザーID
-    fetchUser(userId);
-  });
-  </script>
-  
   <style scoped>
   .mypage-container {
     max-width: 600px;
@@ -126,7 +170,9 @@
     margin-bottom: 5px;
   }
   
-  input {
+  input,
+  select,
+  textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -134,17 +180,17 @@
   }
   
   button {
-    background-color: #ffcb60;
+    background-color: #f7a400;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
   }
   
   button:hover {
-    background-color: #feb626;
+    background-color: #ff8c00;
   }
   
   .message {
