@@ -1,4 +1,5 @@
 <script setup>
+import axios from '@/axios'; // axios設定をインポート
 import MapURL from './components/mapURL.vue';
 </script>
 
@@ -58,46 +59,62 @@ export default {
     };
   },
   methods: {
-    handleFileUpload1(event) {
+    async handleFileUpload1(event) {
       const file = event.target.files[0];
       if (file) {
         console.log('アップロードした写真1:', file);
       }
     },
-    handleFileUpload2(event) {
+    async handleFileUpload2(event) {
       const file = event.target.files[0];
       if (file) {
         console.log('アップロードした写真2:', file);
       }
     },
-    submitRequest() {
-      console.log('依頼内容:', {
-        requestPoints: this.requestPoints,
-        basicInfo: this.basicInfo,
-        requestName: this.requestName,
-        requestCondition: this.requestCondition,
-        minPeople: this.minPeople,
-        maxPeople: this.maxPeople,
-        activityDate: this.activityDate,
-        startTime: this.startTime,
-        endTime: this.endTime,
-        prefecture: this.prefecture,
-        address1: this.address1,
-        address2: this.address2,
-        equipmentNeeded: this.equipmentNeeded,
-        activityAreas: this.activityAreas,
-        activityTheme: this.activityTheme,
-        recommendedAge: this.recommendedAge,
-        features: this.features,
-        areaDetails: this.areaDetails,
-        requestDetails: this.requestDetails,
-      });
+    async submitRequest() {
+      try {
+        // 入力データをまとめる
+        const payload = {
+          requestPoints: this.requestPoints,
+          basicInfo: this.basicInfo,
+          requestName: this.requestName,
+          requestCondition: this.requestCondition,
+          minPeople: this.minPeople,
+          maxPeople: this.maxPeople,
+          activityDate: this.activityDate,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          prefecture: this.prefecture,
+          address1: this.address1,
+          address2: this.address2,
+          equipmentNeeded: this.equipmentNeeded,
+          activityAreas: this.activityAreas,
+          activityTheme: this.activityTheme,
+          recommendedAge: this.recommendedAge,
+          features: this.features,
+          areaDetails: this.areaDetails,
+          requestDetails: this.requestDetails,
+        };
 
-      alert('依頼が投稿されました！');
-    }
-  }
+        // サーバーにPOSTリクエストを送信
+        const response = await axios.post('/request', payload);
+
+        // 成功時のメッセージ
+        alert('依頼が投稿されました！');
+        console.log('レスポンス:', response.data);
+      } catch (error) {
+        console.error('送信エラー:', error);
+        if (error.response && error.response.data) {
+          alert(`エラー: ${error.response.data.message || '送信に失敗しました'}`);
+        } else {
+          alert('ネットワークエラーまたはサーバーエラーが発生しました');
+        }
+      }
+    },
+  },
 };
 </script>
+
 
 <template>
   <div class="toko-page">
