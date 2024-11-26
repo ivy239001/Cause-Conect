@@ -98,7 +98,7 @@ export default {
     position: relative;
     width: 100%;
     max-width: 1000px;
-    margin-left: 150px;
+    margin-left: 300px;
     margin-top: 20px;
     text-align: left;
   }

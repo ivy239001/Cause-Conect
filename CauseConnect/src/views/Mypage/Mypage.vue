@@ -51,7 +51,7 @@ const updateProfile = async () => {
             placeholder="新しいパスワードを入力してください"
           />
         </div>
-  
+
         <!-- ニックネーム -->
         <div class="form-group">
           <label for="nickname">ニックネーム</label>
@@ -62,7 +62,7 @@ const updateProfile = async () => {
             placeholder="ニックネームを入力してください"
           />
         </div>
-  
+
         <!-- 名前 -->
         <div class="form-group">
           <label for="name">名前</label>
@@ -73,7 +73,7 @@ const updateProfile = async () => {
             placeholder="名前を入力してください"
           />
         </div>
-  
+
         <!-- カナ -->
         <div class="form-group">
           <label for="kana">カナ</label>
@@ -84,13 +84,13 @@ const updateProfile = async () => {
             placeholder="カナを入力してください"
           />
         </div>
-  
+
         <!-- 生年月日 -->
         <div class="form-group">
           <label for="birth">生年月日</label>
           <input type="date" id="birth" v-model="user.birth" />
         </div>
-  
+
         <!-- 性別 -->
         <div class="form-group">
           <label for="sex">性別</label>
@@ -101,7 +101,7 @@ const updateProfile = async () => {
             <option value="その他">その他</option>
           </select>
         </div>
-  
+
         <!-- 電話番号 -->
         <div class="form-group">
           <label for="tel">電話番号</label>
@@ -112,7 +112,7 @@ const updateProfile = async () => {
             placeholder="電話番号を入力してください"
           />
         </div>
-  
+
         <!-- メールアドレス -->
         <div class="form-group">
           <label for="email">メールアドレス</label>
@@ -123,7 +123,7 @@ const updateProfile = async () => {
             placeholder="メールアドレスを入力してください"
           />
         </div>
-  
+
         <!-- 自己紹介 -->
         <div class="form-group">
           <label for="intro">自己紹介</label>
@@ -134,7 +134,7 @@ const updateProfile = async () => {
             rows="5"
           ></textarea>
         </div>
-  
+
         <!-- 更新ボタン -->
         <button type="submit">更新する</button>
       </form>
@@ -143,43 +143,46 @@ const updateProfile = async () => {
   </template>
   <style scoped>
   .mypage-container {
-    max-width: 600px;
+    font-family: "Zen Maru Gothic", serif;
+    max-width: auto;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
     border-radius: 8px;
   }
-  
+
   h1 {
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
   form {
     display: flex;
     flex-direction: column;
   }
-  
+
   .form-group {
     margin-bottom: 15px;
   }
-  
+
   label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
   }
-  
+
   input,
   select,
   textarea {
+    font-family: "Zen Maru Gothic", serif;
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+
   button {
+    font-family: "Zen Maru Gothic", serif;
     background-color: #f7a400;
     color: white;
     border: none;
@@ -188,15 +191,14 @@ const updateProfile = async () => {
     font-size: 16px;
     cursor: pointer;
   }
-  
+
   button:hover {
     background-color: #ff8c00;
   }
-  
+
   .message {
     margin-top: 15px;
     color: green;
     text-align: center;
   }
   </style>
-  
