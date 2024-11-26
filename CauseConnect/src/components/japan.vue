@@ -89,6 +89,7 @@ export default {
         </div>
       </div>
     </div>
+
   </template>
 
 
@@ -96,21 +97,23 @@ export default {
   .map-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    margin: auto;
+    max-width: 1000px;
+    margin-left: 150px;
+    margin-top: 20px;
     text-align: left;
   }
 
   .japan-map {
     width: 100%;
-    height: auto;
+    height: 500px;
   }
+
 
   .region {
     position: absolute;
     color: white;
     margin-top: 15px; /* 地域ごとの間隔を縮める */
-    left: -25%;
+    left: 10%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -138,46 +141,49 @@ export default {
   .pref-button {
     font-family: "Zen Maru Gothic", serif;
 
-    background-color: orange;
-    color: white;
-    border: none;
+    background-color: rgb(255, 255, 255);
+    color: #f7a400;
+    border: 2px solid #f7a400;
     border-radius: 5px;
     padding: 5px 10px;
+    display: inline-block; /* ボタンのサイズをテキストに依存しないようにする */
     margin: 2px; /* ボタン間の間隔を縮める */
     cursor: pointer;
     font-size: 20px;
   }
 
   .pref-button:hover {
-    background-color: darkorange;
+    background-color: #ffd6a4;
   }
 
   /* 地域ごとの位置調整 */
   .region-hokkaido {
+    margin-top: -20px;
     top: 5%;
   }
 
   .region-kanto {
-    top: 15%;
+    top: 12%;
   }
 
   .region-chubu {
-    top: 25%;
+    margin-top: -5px;
+    top: 30%;
   }
 
   .region-kansai {
-    top: 35%;
+    top: 40%;
   }
 
   .region-shikoku {
-    top: 45%;
+    top: 53%;
   }
 
   .region-chugoku {
-    top: 55%;
+    top: 65%;
   }
 
   .region-kyushu {
-    top: 65%;
+    top: 78%;
   }
   </style>
