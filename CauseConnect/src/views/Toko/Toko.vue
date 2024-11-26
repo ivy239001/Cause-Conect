@@ -132,10 +132,12 @@ export default {
       <!-- 活動時間 -->
       <div class="form-group">
         <label for="activity-time">活動時間</label>
-        <div class="flex2">
+        <div class="flex">
           <select id="start-time" v-model="startTime">
-            <option v-for="hour in hours" :key="'start-' + hour" :value="hour">{{ hour }}時～</option>
+            <option v-for="hour in hours" :key="'start-' + hour" :value="hour">{{ hour }}時</option>
+
           </select>
+          ～
 
           <select id="end-time" v-model="endTime">
             <option v-for="hour in hours" :key="'end-' + hour" :value="hour">{{ hour }}時</option>
@@ -192,7 +194,7 @@ export default {
       <!-- 活動テーマ -->
       <div class="form-group">
         <label>活動テーマ</label>
-        <div class="flex">
+        <div class="flex3">
           <label class="checkbox-label"><input type="checkbox" v-model="activityTheme.regionalBeautification" />
             地域美化</label>
         </div>
@@ -268,7 +270,8 @@ export default {
 
 <style scoped>
 .toko-page {
-  max-width: 800px;
+  background-color: #f4f4f4;
+  max-width: auto;
   margin: 0 auto;
   padding: 20px;
   font-family: "Zen Maru Gothic", serif;
@@ -286,16 +289,20 @@ export default {
     width: 200px;
     display: flex;
   }
-  .flex2{
-    width: 200px;
-    display: flex;
-  }
 }
 
 #request-points{
   width: 50px;
 }
-
+#area-details{
+  width: 838px;
+}
+#basic-info{
+  width: 838px;
+}
+#request-details{
+  width: 838px;
+}
 
 
 label {
@@ -308,13 +315,14 @@ textarea,
 input,
 select {
   font-family: "Zen Maru Gothic", serif;
-  width: 100%;
   padding: 10px;
   font-size: 16px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+
 
 .radio-group,
 .checkbox-group {
@@ -327,19 +335,22 @@ select {
 .checkbox-label {
   font-size: 14px;
   display: flex;
+  width: 100px;
   align-items: center;
-}
 
+}
 button {
-  background-color: #007bff;
-  color: white;
+  font-family: "Zen Maru Gothic", serif;
+  background-color: #f7a400;
+  color: #333;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #ff8c00;
 }
 </style>

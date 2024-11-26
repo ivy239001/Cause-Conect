@@ -20,6 +20,7 @@ export default {
 <template>
     <div class="map-url-form">
       <label for="map-url">地図URLを入力</label>
+      <br>
       <input
         type="url"
         id="map-url"
@@ -37,6 +38,9 @@ export default {
 
 
   <style scoped>
+  #map-url{
+    width: 838px;
+  }
   .map-url-form {
     font-family: "Zen Maru Gothic", serif;
     margin-top: 20px;
