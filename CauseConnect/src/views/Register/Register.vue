@@ -8,6 +8,9 @@
       <label for="password">パスワード:</label>
       <input type="password" id="password" v-model="password" placeholder="パスワードを入力" />
 
+      <label for="password_confirmation">パスワード確認:</label>
+      <input type="password" id="password_confirmation" v-model="password_confirmation" placeholder="パスワード確認を入力" />
+
       <button type="submit">登録</button>
     </form>
     <p v-if="message">{{ message }}</p>
@@ -16,20 +19,22 @@
 
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios'; // axiosのインポート
+import axios from '@/axios'; // axios.jsをインポート
 
 // 入力された値を保存するためのref
 const email = ref('');
 const password = ref('');
+const password_confirmation = ref('');  // 新しい変数
 const message = ref('');
 
 // 登録処理
 const registerUser = async () => {
   try {
     // バックエンドにPOSTリクエストを送信
-    const response = await axios.post('http://172.16.3.136:8000/api/register', {
+    const response = await axios.post('/register', {
       email: email.value,
       password: password.value,
+      password_confirmation: password_confirmation.value,  // 追加
     });
 
     // 成功した場合、レスポンスからメッセージを受け取り表示
