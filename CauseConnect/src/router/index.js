@@ -4,9 +4,9 @@ import Login from '@/views/LoginForm/LoginView.vue'
 import Info from '@/views/Info/Info.vue'
 import Toko from '@/views/Toko/Toko.vue'
 import Register from '@/views/Register/Register.vue'
-import Home from '@/views/Home/Home.vue' // Home.vue をインポート
+import Home from '@/views/Home/Home.vue'
 import List from '@/views/List/List.vue'
-
+import Mypage from '@/views/Mypage/Mypage.vue' // Mypage.vue をインポート
 
 const routes = [
   { path: '/', name: 'Home', component: Home }, // '/' で Home.vue を表示
@@ -15,7 +15,8 @@ const routes = [
   { path: '/info', name: 'Info', component: Info },
   { path: '/Toko', name: 'Toko', component: Toko },
   { path: '/Register', name: 'Register', component: Register },
-  { path: '/list', name: 'List',component: List }, // リストページ
+  { path: '/list', name: 'List', component: List }, // リストページ
+  { path: '/mypage', name: 'Mypage', component: Mypage }, // マイページルート
 ]
 
 const router = createRouter({
