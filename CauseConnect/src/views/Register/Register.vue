@@ -27,7 +27,7 @@ const message = ref('');
 const registerUser = async () => {
   try {
     // バックエンドにPOSTリクエストを送信
-    const response = await axios.post('/register', {
+    const response = await axios.post('http://172.16.3.136:8000/api/register', {
       email: email.value,
       password: password.value,
     });
