@@ -1,51 +1,7 @@
-<template>
-  <header class="nav">
-    <!-- サイトロゴ（クリックでトップページへ遷移） -->
-    <div class="logo" @click="goToHome">
-      <img src="../assets/CC_logo.png"/>
-    </div>
-
-    <!-- ナビゲーションメニュー -->
-    <nav class="nav-links">
-      <router-link to="/">
-        <button>Home</button>
-      </router-link>
-
-      <router-link to="/list">
-        <button>依頼一覧</button>
-      </router-link>
-
-      <router-link to="/Register">
-        <button>新規登録</button>
-      </router-link>
-
-      <router-link to="/login">
-        <button>ログイン</button>
-      </router-link>
-
-      <router-link to="/mypage">
-        <button>マイページ</button>
-      </router-link>
-
-
-      <router-link to="/info">
-        <button>当サイトについて</button>
-      </router-link>
-
-      <router-link to="/FAQ">
-        <button>FAQ</button>
-      </router-link>
-
-    </nav>
-
-    <!-- 依頼するボタン -->
-    <div>
-      <button @click="goToToko">依頼する</button>
-    </div>
-  </header>
-</template>
-
 <script>
+import RealTimeClock from './RealTimeClock.vue';
+
+
 export default {
   name: "Navi",
   methods: {
@@ -59,8 +15,59 @@ export default {
       this.$router.push("/Toko");
     },
   },
+  components: {
+    RealTimeClock,
+  },
 };
 </script>
+
+<template>
+  <header class="nav">
+    <!-- サイトロゴ（クリックでトップページへ遷移） -->
+    <div class="logo" @click="goToHome">
+      <img src="../assets/CC_logo.png"/>
+    </div>
+
+    <!-- ナビゲーションメニュー -->
+    <nav class="nav-links">
+      <router-link to="/">
+        <button class="btn1">Home</button>
+      </router-link>
+
+      <router-link to="/list">
+        <button class="btn1">依頼一覧</button>
+      </router-link>
+
+      <router-link to="/Register">
+        <button class="btn1">新規登録</button>
+      </router-link>
+
+      <router-link to="/login">
+        <button class="btn1">ログイン</button>
+      </router-link>
+
+      <router-link to="/mypage">
+        <button class="btn1">マイページ</button>
+      </router-link>
+
+
+      <router-link to="/info">
+        <button class="btn1">当サイトについて</button>
+      </router-link>
+
+      <router-link to="/FAQ">
+        <button class="btn1">FAQ</button>
+      </router-link>
+    </nav>
+    <RealTimeClock />
+
+    <!-- 依頼するボタン -->
+    <div>
+      <button class="btn1" @click="goToToko">依頼する</button>
+    </div>
+  </header>
+</template>
+
 
 <style scoped>
 /* ナビバー全体のスタイル */

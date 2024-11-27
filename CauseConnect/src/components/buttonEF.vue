@@ -1,5 +1,5 @@
-<style>
-button {
+<style scoped>
+:global(.button) {
   font-family: "Zen Maru Gothic", serif;
   border-color: #f7a400;
   background: #f4f4f4;

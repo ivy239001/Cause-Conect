@@ -1,5 +1,6 @@
 <script setup>
 import Navi from './components/Nav.vue'; // ナビゲーションバーコンポーネントをインポート
+
 </script>
 
 <template>
@@ -7,7 +8,6 @@ import Navi from './components/Nav.vue'; // ナビゲーションバーコンポ
     <div id="app">
       <!-- ナビゲーションバー（常に表示） -->
       <Navi />
-
       <!-- ここにページ遷移によって切り替わるコンテンツを表示 -->
       <router-view/> <!-- 遷移先のコンテンツが表示されます -->
     </div>
