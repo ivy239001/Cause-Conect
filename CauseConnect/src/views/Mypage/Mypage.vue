@@ -18,8 +18,23 @@ const user = reactive({
   sex: "",
   tel: "",
   email: "",
+  prefecture: "", // 都道府県
+  address1: "", // 住所1: 市町村
+  address2: "", // 住所2: 番地、建物名
   intro: "",
 });
+
+// 都道府県のリスト
+const prefectures = [
+  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
+  "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
+  "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
+  "岐阜県", "静岡県", "愛知県", "三重県",
+  "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
+  "鳥取県", "島根県", "岡山県", "広島県", "山口県",
+  "徳島県", "香川県", "愛媛県", "高知県",
+  "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
+];
 
 // フィードバック用メッセージ
 const message = ref("");
@@ -157,6 +172,35 @@ const submitForm = async () => {
         />
       </div>
 
+      <!-- 住所 -->
+      <div class="form-group">
+        <label for="prefecture">都道府県</label>
+        <select id="prefecture" v-model="user.prefecture">
+          <option value="" disabled>都道府県を選択してください</option>
+          <option v-for="pref in prefectures" :key="pref" :value="pref">
+            {{ pref }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="address1">住所1（市町村）</label>
+        <input
+          type="text"
+          id="address1"
+          v-model="user.address1"
+          placeholder="市町村を入力してください"
+        />
+      </div>
+      <div class="form-group">
+        <label for="address2">住所2（番地・建物名）</label>
+        <input
+          type="text"
+          id="address2"
+          v-model="user.address2"
+          placeholder="番地や建物名を入力してください"
+        />
+      </div>
+
       <!-- 自己紹介 -->
       <div class="form-group">
         <label for="intro">自己紹介</label>
@@ -176,6 +220,7 @@ const submitForm = async () => {
     <p v-if="message" class="message">{{ message }}</p>
   </div>
 </template>
+
 
 <style scoped>
 .mypage-container {
