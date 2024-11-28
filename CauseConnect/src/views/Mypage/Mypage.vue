@@ -1,11 +1,11 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, inject } from "vue";
 import axios from "axios";
 import PhotoUploader from "./Component/PhotoUploader.vue";
 import CheckLoginStatus from "@/components/CheckLoginStatus.vue";
 
-// 登録または更新モードの切り替えフラグ
-const isRegistrationMode = ref(true); // 初期値: 新規登録モード
+// ログイン状態を共有（親コンポーネントから提供）
+const isLoggedIn = inject("isLoggedIn"); // ログイン状態の共有
 
 // ユーザー情報
 const user = reactive({
@@ -39,44 +39,39 @@ const prefectures = [
 // フィードバック用メッセージ
 const message = ref("");
 
-// ログイン状態の確認結果を受け取る
-const handleLoginStatusChecked = (isLoggedIn) => {
-  isRegistrationMode.value = !isLoggedIn; // ログインしていれば更新モード、未ログインなら登録モード
-};
-
 // フォーム送信処理
 const submitForm = async () => {
   try {
     const payload = { ...user };
 
-    const endpoint = isRegistrationMode.value ? "/register" : "/mypage/update";
+    const endpoint = isLoggedIn.value ? "/mypage/update" : "/register";
     const response = await axios.post(endpoint, payload);
 
     message.value =
       response.data.message ||
-      (isRegistrationMode.value
-        ? "新規登録が完了しました。"
-        : "プロフィールを更新しました。");
+      (isLoggedIn.value
+        ? "プロフィールを更新しました。"
+        : "新規登録が完了しました。");
   } catch (error) {
     console.error(
-      isRegistrationMode.value ? "新規登録失敗" : "プロフィール更新失敗",
+      isLoggedIn.value ? "プロフィール更新失敗" : "新規登録失敗",
       error
     );
     message.value =
-      isRegistrationMode.value
-        ? "新規登録に失敗しました。"
-        : "プロフィールの更新に失敗しました。";
+      isLoggedIn.value
+        ? "プロフィールの更新に失敗しました。"
+        : "新規登録に失敗しました。";
   }
 };
 </script>
 
 <template>
   <!-- ログイン状態確認 -->
-  <CheckLoginStatus @login-status-checked="handleLoginStatusChecked" />
+  <CheckLoginStatus />
 
   <PhotoUploader />
   <div class="mypage-container">
-    <h1>{{ isRegistrationMode ? "新規登録" : "マイページ - 会員情報編集" }}</h1>
+    <h1>{{ isLoggedIn ? "マイページ - 会員情報編集" : "新規登録" }}</h1>
     <form @submit.prevent="submitForm">
       <!-- メールアドレス -->
       <div class="form-group">
@@ -101,7 +96,7 @@ const submitForm = async () => {
       </div>
 
       <!-- 新規登録専用フィールド -->
-      <div class="form-group" v-if="isRegistrationMode">
+      <div class="form-group" v-if="!isLoggedIn">
         <label for="confirm-password">パスワード確認</label>
         <input
           type="password"
@@ -214,7 +209,7 @@ const submitForm = async () => {
 
       <!-- 送信ボタン -->
       <button type="submit">
-        {{ isRegistrationMode ? "登録する" : "更新する" }}
+        {{ isLoggedIn ? "更新する" : "登録する" }}
       </button>
     </form>
     <p v-if="message" class="message">{{ message }}</p>
