@@ -279,7 +279,7 @@ export default {
       <MapURL />
 
       <!-- 送信ボタン -->
-      <button type="submit" class="button">投稿する</button>
+      <button type="submit" class="btn1">投稿する</button>
     </form>
   </div>
 </template>
@@ -356,41 +356,10 @@ select {
   align-items: center;
 
 }
-button {
-  font-family: "Zen Maru Gothic", serif;
-  border-color: #f7a400;
-  background: #f4f4f4;
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+
+.btn1{
   margin-top: 20px;
-  max-width: 240px;
-  padding: 10px 25px;
-  color: #f7a400;
-  transition: 0.3s ease-in-out;
-  font-weight: 500;
-  z-index:0;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  display: block;
-  background: #ff8c00;
-  transition: 0.3s;
-  left: 0;
-}
-
-.button:hover {
-    color: #333;
-}
-.button:hover::before {
-    width: 100%;
-    z-index: -1;
+  width: 200px;
 }
 
 </style>
