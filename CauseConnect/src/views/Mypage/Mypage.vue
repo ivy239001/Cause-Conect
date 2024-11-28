@@ -1,30 +1,36 @@
 <script setup>
+// `reactive` や `ref` はリアクティブなデータ管理に使用する
+// `inject` は親コンポーネントから提供されたデータを受け取る
 import { reactive, ref, inject } from "vue";
+
+// `axios` を使ってHTTPリクエストを送信
 import axios from "axios";
+
+// コンポーネントのインポート（写真アップロード、ログイン状態確認用）
 import PhotoUploader from "./Component/PhotoUploader.vue";
 import CheckLoginStatus from "@/components/CheckLoginStatus.vue";
 
-// ログイン状態を共有（親コンポーネントから提供）
-const isLoggedIn = inject("isLoggedIn"); // ログイン状態の共有
+// ログイン状態を親コンポーネントから受け取る（`provide/inject` 機能を利用）
+const isLoggedIn = inject("isLoggedIn"); // ログイン状態を共有
 
-// ユーザー情報
+// ユーザー情報を管理するリアクティブなオブジェクト
 const user = reactive({
-  password: "",
-  confirmPassword: "", // 新規登録用: パスワード確認
-  nickname: "",
-  name: "",
-  kana: "",
-  birth: "",
-  sex: "",
-  tel: "",
-  email: "",
-  prefecture: "", // 都道府県
-  address1: "", // 住所1: 市町村
-  address2: "", // 住所2: 番地、建物名
-  intro: "",
+  password: "",          // パスワード
+  confirmPassword: "",   // 確認用パスワード（新規登録用）
+  nickname: "",          // ニックネーム
+  name: "",              // 名前
+  kana: "",              // カナ
+  birth: "",             // 生年月日
+  sex: "",               // 性別
+  tel: "",               // 電話番号
+  email: "",             // メールアドレス
+  prefecture: "",        // 都道府県
+  address1: "",          // 住所1: 市町村
+  address2: "",          // 住所2: 番地・建物名
+  intro: "",             // 自己紹介
 });
 
-// 都道府県のリスト
+// 都道府県のリストを定義（プルダウンメニューで使用）
 const prefectures = [
   "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
   "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
@@ -36,42 +42,54 @@ const prefectures = [
   "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
 ];
 
-// フィードバック用メッセージ
+// フィードバックメッセージ（登録や更新の結果を表示）
 const message = ref("");
 
 // フォーム送信処理
 const submitForm = async () => {
-  try {
-    const payload = { ...user };
+  console.log(user);
+  // try {
+  //   // ユーザー情報をコピーしてリクエストペイロードに設定
+  //   const payload = { ...user };
 
-    const endpoint = isLoggedIn.value ? "/mypage/update" : "/register";
-    const response = await axios.post(endpoint, payload);
+  //   // ログイン状態によって送信先エンドポイントを切り替え
+  //   const endpoint = isLoggedIn.value ? "/mypage/update" : "/register";
 
-    message.value =
-      response.data.message ||
-      (isLoggedIn.value
-        ? "プロフィールを更新しました。"
-        : "新規登録が完了しました。");
-  } catch (error) {
-    console.error(
-      isLoggedIn.value ? "プロフィール更新失敗" : "新規登録失敗",
-      error
-    );
-    message.value =
-      isLoggedIn.value
-        ? "プロフィールの更新に失敗しました。"
-        : "新規登録に失敗しました。";
-  }
+  //   // サーバーにHTTP POSTリクエストを送信
+  //   const response = await axios.post(endpoint, payload);
+
+  //   // サーバーからのレスポンスメッセージを設定
+  //   message.value =
+  //     response.data.message ||
+  //     (isLoggedIn.value
+  //       ? "プロフィールを更新しました。"
+  //       : "新規登録が完了しました。");
+  // } catch (error) {
+  //   // エラー時の処理
+  //   console.error(
+  //     isLoggedIn.value ? "プロフィール更新失敗" : "新規登録失敗",
+  //     error
+  //   );
+  //   message.value =
+  //     isLoggedIn.value
+  //       ? "プロフィールの更新に失敗しました。"
+  //       : "新規登録に失敗しました。";
+  // }
 };
 </script>
 
 <template>
-  <!-- ログイン状態確認 -->
+  <!-- ログイン状態確認コンポーネント -->
   <CheckLoginStatus />
 
+  <!-- 写真アップロードコンポーネント -->
   <PhotoUploader />
+
   <div class="mypage-container">
+    <!-- ページタイトルをログイン状態によって切り替え -->
     <h1>{{ isLoggedIn ? "マイページ - 会員情報編集" : "新規登録" }}</h1>
+
+    <!-- フォーム開始 -->
     <form @submit.prevent="submitForm">
       <!-- メールアドレス -->
       <div class="form-group">
@@ -95,7 +113,7 @@ const submitForm = async () => {
         />
       </div>
 
-      <!-- 新規登録専用フィールド -->
+      <!-- 確認用パスワード（新規登録時のみ表示） -->
       <div class="form-group" v-if="!isLoggedIn">
         <label for="confirm-password">パスワード確認</label>
         <input
@@ -212,9 +230,12 @@ const submitForm = async () => {
         {{ isLoggedIn ? "更新する" : "登録する" }}
       </button>
     </form>
+
+    <!-- メッセージを表示 -->
     <p v-if="message" class="message">{{ message }}</p>
   </div>
 </template>
+
 
 
 <style scoped>
