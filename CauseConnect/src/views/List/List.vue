@@ -1,91 +1,48 @@
-<script>
-// Refine.vueをインポート
-import Refine from "./components/Refine.vue";
+<script setup>
+import RequestList from "./components/RequestList.vue"; // RequestListコンポーネントをインポート
+import Refine from "./components/Refine.vue"; // フィルターコンポーネントをインポート
 
-export default {
-  components: {
-    Refine,
-  },
-  data() {
-    return {
-      loading: false, // ローディング状態を管理
-      requests: [
-        {
-          id: 1,
-          name: "地域美化活動",
-          description: "地域の公園を掃除する活動です。",
-          date: "2024-12-01",
-          location: "東京都渋谷区",
-        },
-        {
-          id: 2,
-          name: "川の清掃",
-          description: "河川敷のゴミ拾い活動を行います。",
-          date: "2024-12-15",
-          location: "神奈川県横浜市",
-        },
-        {
-          id: 3,
-          name: "山のトレイル整備",
-          description: "登山道の整備活動です。",
-          date: "2024-12-20",
-          location: "長野県松本市",
-        },
-      ],
-      filters: {
-        keyword: "",
-        location: "",
-        date: "",
-      },
-    };
-  },
-  computed: {
-    filteredRequests() {
-      return this.requests.filter((request) => {
-        const matchesKeyword = request.name.includes(this.filters.keyword);
-        const matchesLocation = this.filters.location
-          ? request.location.includes(this.filters.location)
-          : true;
-        const matchesDate = this.filters.date
-          ? request.date === this.filters.date
-          : true;
+import { ref } from "vue";
 
-        return matchesKeyword && matchesLocation && matchesDate;
-      });
-    },
-  },
-  methods: {
-    // Refineコンポーネントからフィルター条件を受け取り
-    applyFilters(filters) {
-      this.loading = true;
-      setTimeout(() => {
-        this.filters = filters;
-        this.loading = false; // データ取得完了
-      }, 500); // ローディングを模した遅延
-    },
-    // フィルターのリセット
-    resetFilters() {
-      this.filters = {
-        keyword: "",
-        location: "",
-        date: "",
-      };
-    },
-  },
+// ローディング状態を管理
+const loading = ref(false);
+
+// フィルター条件を保持するリアクティブなオブジェクト
+const filters = ref({
+  keyword: "",
+  location: "",
+  date: "",
+});
+
+// フィルタリング処理をモック化
+const applyFilters = (newFilters) => {
+  loading.value = true;
+  setTimeout(() => {
+    filters.value = { ...newFilters }; // 新しいフィルター条件を適用
+    loading.value = false; // ローディングを終了
+  }, 500); // ローディング遅延を模擬
+};
+
+// フィルターのリセット
+const resetFilters = () => {
+  filters.value = {
+    keyword: "",
+    location: "",
+    date: "",
+  };
 };
 </script>
-
 
 <template>
   <div class="list-page">
     <div class="list-container">
-      <!-- 左側のRefineコンポーネント -->
+      <!-- 左側: フィルター -->
       <div class="refine-sidebar">
         <Refine @apply-filters="applyFilters" />
         <button class="reset-button" @click="resetFilters">条件をリセット</button>
       </div>
 
-      <!-- 右側のリスト -->
+      <!-- 右側: 依頼リスト -->
       <div class="list-content">
         <h1>依頼一覧</h1>
 
@@ -94,22 +51,13 @@ export default {
           <p>ロード中...</p>
         </div>
 
-        <!-- フィルタリング結果がない場合のメッセージ -->
-        <p v-if="!loading && filteredRequests.length === 0" class="no-results">
-          条件に一致する依頼が見つかりません。
+        <!-- フィルタリング条件がない場合のメッセージ -->
+        <p v-if="!loading && !filters.keyword && !filters.location && !filters.date" class="no-filters">
+          条件を入力して依頼を絞り込んでください。
         </p>
 
-        <!-- 依頼リスト -->
-        <ul v-else>
-          <li v-for="request in filteredRequests" :key="request.id" class="request-item">
-            <h3>{{ request.name }}</h3>
-            <p>{{ request.description }}</p>
-            <p><strong>日付:</strong> {{ request.date }}</p>
-            <p><strong>場所:</strong> {{ request.location }}</p>
-            <!-- 詳細ページへのリンク -->
-            <router-link :to="`/details/${request.id}`">詳細を見る</router-link>
-          </li>
-        </ul>
+        <!-- フィルター適用後の依頼リスト -->
+        <RequestList v-if="!loading" :filters="filters" />
       </div>
     </div>
   </div>
@@ -158,43 +106,9 @@ h1 {
   margin: 20px 0;
 }
 
-.no-results {
+.no-filters {
   font-size: 16px;
   color: #999;
   text-align: center;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.request-item {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.request-item h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
-}
-
-.request-item p {
-  margin: 5px 0;
-  font-size: 14px;
-}
-
-router-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-}
-
-router-link:hover {
-  text-decoration: underline;
 }
 </style>

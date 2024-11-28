@@ -1,24 +1,44 @@
 <script>
 import { onMounted, onBeforeUnmount } from 'vue';
-import sample1 from '@/assets/img/sample1.jpg';
-import sample2 from '@/assets/img/sample1.jpg';
-import sample3 from '@/assets/img/sample1.jpg';
-import sample4 from '@/assets/img/sample1.jpg';
-import sample5 from '@/assets/img/sample2.jpg';
-
+import RequestItem from '@/views/List/components/RequestItem.vue'; // RequestItemコンポーネントをインポート
 export default {
   name: "ImageSlide",
+  components: {
+    RequestItem, // コンポーネントを登録
+  },
   data() {
     return {
-      images: [sample1, sample2, sample3, sample4, sample5],
+      // サンプルの依頼データ
+      requests: [
+        {
+          id: 1,
+          name: "地域美化活動",
+          description: "地域の公園を掃除する活動です。",
+          date: "2024-12-01",
+          location: "東京都渋谷区",
+        },
+        {
+          id: 2,
+          name: "川の清掃",
+          description: "河川敷のゴミ拾い活動を行います。",
+          date: "2024-12-15",
+          location: "神奈川県横浜市",
+        },
+        {
+          id: 3,
+          name: "山のトレイル整備",
+          description: "登山道の整備活動です。",
+          date: "2024-12-20",
+          location: "長野県松本市",
+        },
+      ],
       currentSlide: 0,
       slideWidth: 600,
-      imageGap: 300,
-      slideWidthWithGap: 900,
+      imageGap: 30,
+      slideWidthWithGap: 630,
       intervalId: null, // スライドの自動進行ID
     };
   },
-
   computed: {
     imageWrapperStyle() {
       return {
@@ -29,12 +49,12 @@ export default {
   },
   methods: {
     prevSlide() {
-      this.currentSlide = (this.currentSlide - 1 + this.images.length) % this.images.length;
+      this.currentSlide = (this.currentSlide - 1 + this.requests.length) % this.requests.length;
     },
     nextSlide() {
-      this.currentSlide = (this.currentSlide + 1) % this.images.length;
+      this.currentSlide = (this.currentSlide + 1) % this.requests.length;
     },
-    setImageWidth() {
+    setSlideWidth() {
       this.slideWidth = window.innerWidth < 600 ? window.innerWidth - 40 : 600;
       this.slideWidthWithGap = this.slideWidth + this.imageGap;
     },
@@ -51,30 +71,29 @@ export default {
     },
   },
   onMounted() {
-    this.setImageWidth();
-    window.addEventListener('resize', this.setImageWidth);
+    this.setSlideWidth();
+    window.addEventListener('resize', this.setSlideWidth);
     this.autoSlide();
   },
   onBeforeUnmount() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-    window.removeEventListener('resize', this.setImageWidth);
+    window.removeEventListener('resize', this.setSlideWidth);
   },
 };
 </script>
 
 <template>
   <div class="slide-container">
-    <!-- スライド表示のための画像のラッパー -->
-    <div class="image-wrapper" :style="imageWrapperStyle">
-      <img
-        v-for="(image, index) in images"
+    <!-- スライド表示のためのコンポーネントのラッパー -->
+    <div class="request-wrapper" :style="imageWrapperStyle">
+      <RequestItem
+        v-for="(request, index) in requests"
         :key="index"
-        :src="image"
-        alt="スライド画像"
-        class="slide-image"
-        :style="{ width: slideWidth + 'px' }" /> <!-- 画像の幅をスライド幅に合わせる -->
+        :request="request"
+        :style="{ width: slideWidth + 'px' }" 
+      />
     </div>
 
     <!-- 左右スクロールボタン -->
@@ -82,7 +101,6 @@ export default {
     <button class="next" @click="nextSlide" aria-label="Next Slide">→</button>
   </div>
 </template>
-
 
 <style scoped>
 .slide-container {
@@ -92,17 +110,9 @@ export default {
   overflow: hidden;
 }
 
-.image-wrapper {
+.request-wrapper {
   display: flex;
   transition: transform 0.5s ease-in-out;
-}
-
-.slide-image {
-  width: 600px;
-  height: 400px;
-  object-fit: cover;
-  margin-right: 30px;
-  border-radius: 10px;
 }
 
 button {
