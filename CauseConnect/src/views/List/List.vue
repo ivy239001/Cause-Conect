@@ -1,42 +1,3 @@
-<template>
-  <div class="list-page">
-    <div class="list-container">
-      <!-- 左側のRefineコンポーネント -->
-      <div class="refine-sidebar">
-        <Refine @apply-filters="applyFilters" />
-        <button class="reset-button" @click="resetFilters">条件をリセット</button>
-      </div>
-
-      <!-- 右側のリスト -->
-      <div class="list-content">
-        <h1>依頼一覧</h1>
-
-        <!-- ローディングスピナー -->
-        <div v-if="loading" class="loading-spinner">
-          <p>ロード中...</p>
-        </div>
-
-        <!-- フィルタリング結果がない場合のメッセージ -->
-        <p v-if="!loading && filteredRequests.length === 0" class="no-results">
-          条件に一致する依頼が見つかりません。
-        </p>
-
-        <!-- 依頼リスト -->
-        <ul v-else>
-          <li v-for="request in filteredRequests" :key="request.id" class="request-item">
-            <h3>{{ request.name }}</h3>
-            <p>{{ request.description }}</p>
-            <p><strong>日付:</strong> {{ request.date }}</p>
-            <p><strong>場所:</strong> {{ request.location }}</p>
-            <!-- 詳細ページへのリンク -->
-            <router-link :to="`/details/${request.id}`">詳細を見る</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 // Refine.vueをインポート
 import Refine from "./components/Refine.vue";
@@ -113,6 +74,46 @@ export default {
   },
 };
 </script>
+
+
+<template>
+  <div class="list-page">
+    <div class="list-container">
+      <!-- 左側のRefineコンポーネント -->
+      <div class="refine-sidebar">
+        <Refine @apply-filters="applyFilters" />
+        <button class="reset-button" @click="resetFilters">条件をリセット</button>
+      </div>
+
+      <!-- 右側のリスト -->
+      <div class="list-content">
+        <h1>依頼一覧</h1>
+
+        <!-- ローディングスピナー -->
+        <div v-if="loading" class="loading-spinner">
+          <p>ロード中...</p>
+        </div>
+
+        <!-- フィルタリング結果がない場合のメッセージ -->
+        <p v-if="!loading && filteredRequests.length === 0" class="no-results">
+          条件に一致する依頼が見つかりません。
+        </p>
+
+        <!-- 依頼リスト -->
+        <ul v-else>
+          <li v-for="request in filteredRequests" :key="request.id" class="request-item">
+            <h3>{{ request.name }}</h3>
+            <p>{{ request.description }}</p>
+            <p><strong>日付:</strong> {{ request.date }}</p>
+            <p><strong>場所:</strong> {{ request.location }}</p>
+            <!-- 詳細ページへのリンク -->
+            <router-link :to="`/details/${request.id}`">詳細を見る</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .list-container {

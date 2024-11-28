@@ -226,7 +226,7 @@ const submitForm = async () => {
       </div>
 
       <!-- 送信ボタン -->
-      <button type="submit">
+      <button class="btn1"  type="submit">
         {{ isLoggedIn ? "更新する" : "登録する" }}
       </button>
     </form>
@@ -240,7 +240,6 @@ const submitForm = async () => {
 
 <style scoped>
 .mypage-container {
-  font-family: "Zen Maru Gothic", serif;
   max-width: auto;
   margin: 0 auto;
   padding: 20px;
@@ -279,23 +278,9 @@ textarea {
 }
 
 button {
-  font-family: "Zen Maru Gothic", serif;
-  background-color: #f7a400;
   color: white;
-  border: none;
-  padding: 10px 20px;
+  padding: 15px;
   border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
-button:hover {
-  background-color: #ff8c00;
-}
-
-.message {
-  margin-top: 15px;
-  color: green;
-  text-align: center;
 }
 </style>
