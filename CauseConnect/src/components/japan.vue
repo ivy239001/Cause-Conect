@@ -128,7 +128,6 @@ export default {
   }
 
   .region h2 {
-    font-family: "Zen Maru Gothic", serif;
     color: black;
     margin-right: 5px; /* タイトルとボタンの間隔を縮める */
   }

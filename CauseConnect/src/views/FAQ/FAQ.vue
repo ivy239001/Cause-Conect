@@ -53,7 +53,6 @@ function toggleAnswer(index) {
 }
 
 .faq-title {
-  font-family: "Zen Maru Gothic", serif;
   text-align: center;
   font-size: 2rem;
   margin-bottom: 1.5rem;
@@ -66,8 +65,6 @@ function toggleAnswer(index) {
 }
 
 .faq-question {
-  font-family: "Zen Maru Gothic", serif;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -93,8 +90,6 @@ function toggleAnswer(index) {
 }
 
 .faq-answer {
-  font-family: "Zen Maru Gothic", serif;
-
   padding: 10px;
   background-color: #f1f1f1;
   border-radius: 5px;

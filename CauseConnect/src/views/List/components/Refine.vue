@@ -6,6 +6,8 @@
       <div class="form-group">
         <label for="keyword">フリーワード</label>
         <input type="text" id="keyword" v-model="filters.keyword" placeholder="例: ゴミ拾い" />
+        <!--フリーワードのみの検索-->
+        <button type="submit" class="btn1">検索</button>
       </div>
 
       <!-- 募集状況 -->
@@ -78,8 +80,8 @@
           </label>
         </div>
       </div>
-
-      <button type="submit" class="search-button">検索</button>
+      <!--チェックボックスの検索-->
+      <button type="submit" class="btn1">検索</button>
     </form>
   </div>
 </template>
@@ -117,7 +119,7 @@ export default {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f7a400;
+  background-color: #ffca5f;
 
 }
 
@@ -134,21 +136,25 @@ label {
 
 input[type="text"],
 select {
-  width: 100%;
+  font-family: "Zen Maru Gothic", serif;
+  width: 60%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 2px solid #333;
   border-radius: 4px;
+  margin-right: 7px;
 }
 
 input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.search-button {
-  background-color: #000000;
-  color: white;
-  border: none;
-  padding: 10px 20px;
+.btn1 {
+  margin-top: 5px;
+  background-color: #fff;
+  color: #333;
+  border: 2px solid;
+  border-color: #ff8c00;
+  padding: 5px 20px;
   cursor: pointer;
   border-radius: 4px;
 }
