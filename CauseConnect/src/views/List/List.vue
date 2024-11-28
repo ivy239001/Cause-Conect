@@ -39,7 +39,7 @@ const resetFilters = () => {
       <!-- 左側: フィルター -->
       <div class="refine-sidebar">
         <Refine @apply-filters="applyFilters" />
-        <button class="reset-button" @click="resetFilters">条件をリセット</button>
+        <button class="btn1" @click="resetFilters">条件をリセット</button>
       </div>
 
       <!-- 右側: 依頼リスト -->
@@ -64,6 +64,10 @@ const resetFilters = () => {
 </template>
 
 <style scoped>
+.btn1{
+  color: #333;
+}
+
 .list-container {
   display: flex;
   gap: 20px;
@@ -76,19 +80,6 @@ const resetFilters = () => {
   border-right: 1px solid #ccc;
 }
 
-.reset-button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #f7a400;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.reset-button:hover {
-  background-color: #ff8c00;
-}
 
 .list-content {
   flex-grow: 1;
