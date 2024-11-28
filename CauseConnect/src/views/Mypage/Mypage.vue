@@ -69,7 +69,7 @@ const submitForm = async () => {
   <!-- ログイン状態確認 -->
   <CheckLoginStatus />
 
-  <PhotoUploader />
+  <PhotoUploader/>
   <div class="mypage-container">
     <h1>{{ isLoggedIn ? "マイページ - 会員情報編集" : "新規登録" }}</h1>
     <form @submit.prevent="submitForm">
