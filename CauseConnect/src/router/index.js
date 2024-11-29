@@ -3,7 +3,7 @@ import FAQ from '@/views/FAQ/FAQ.vue'
 import Login from '@/views/LoginForm/LoginView.vue'
 import Info from '@/views/Info/Info.vue'
 import Toko from '@/views/Toko/Toko.vue'
-import Register from '@/views/Mypage/Mypage.vue'
+import Register from '@/views/Register/Register.vue'
 import Home from '@/views/Home/Home.vue'
 import List from '@/views/List/List.vue'
 import Mypage from '@/views/Mypage/Mypage.vue' // Mypage.vue をインポート
