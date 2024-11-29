@@ -53,6 +53,8 @@ const requests = ref([
 
 .request-item:hover {
   transform: translateX(-10px) scale(1.05); /* 左に移動して拡大 */
+  background-color:#ffeacf;
+  border: 5px solid #ff8c00;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつけて強調 */
 }
 
