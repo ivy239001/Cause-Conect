@@ -1,7 +1,7 @@
 <script setup>
 import BasicInfo from './components/BasicInfo.vue';
 import ParticipantsInfo from './components/ParticipantsInfo.vue';
-import ProgressStep from './components/ProgressStep.vue';
+import ProgressStep from './components/ProgressStep/ProgressStep.vue';
 
 
 // 進行度の状態（0～4）

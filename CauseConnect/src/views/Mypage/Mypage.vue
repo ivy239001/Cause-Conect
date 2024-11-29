@@ -1,156 +1,167 @@
 <script setup>
-import { reactive, ref } from "vue";
-import axios from "axios";
-import PhotoUploader from "./Component/PhotoUploader.vue";
+// Vueの`reactive`, `ref`, `onMounted`をインポート
+import { reactive, ref, onMounted } from 'vue'
+// axiosインスタンスをインポート
+// import apiClient from './axios'
+import apiClient from '@/axios'; // axios設定をインポート
 
-// ユーザー情報を管理するリアクティブなオブジェクト
+// 画像アップローダーコンポーネントをインポート（画像アップロードのため）
+// import PhotoUploader from '@/PhotoUploader.vue'
+
+// 初期状態のユーザーデータを格納する`reactive`なオブジェクト
 const user = reactive({
-  confirmPassword: "1234",
-  nickname: "ニックネーム",
-  name: "ネーム",
-  kana: "カナ",
-  birth: "",
-  sex: "",
-  tel: "09012345678",
-  email: "sample@ivy.co.jp",
-  prefecture_id: null,  // 都道府県ID（nullからスタート）
-  address1: "住所１",
-  address2: "住所２",
-  intro: "これはサンプルデータであらかじめ入力しています",
-});
+  password: '', // パスワード
+  nickname: '', // ニックネーム
+  name: '', // 名前
+  kana: '', // カナ
+  birth: '', // 生年月日
+  sex: '', // 性別
+  tel: '', // 電話番号
+  email: '', // メールアドレス
+  address1: '', // 住所1（市町村）
+  address2: '', // 住所2（番地や建物名）
+  post_code: '', // 郵便番号
+  prefecture: '', // 都道府県ID
+  intro: '', // 自己紹介
+})
 
-// 都道府県のリスト（IDと都道府県名のペア）
-const prefectures = [
-  { id: 1, name: "北海道" },
-  { id: 2, name: "青森県" },
-  { id: 3, name: "岩手県" },
-  { id: 4, name: "宮城県" },
-  { id: 5, name: "秋田県" },
-  { id: 6, name: "山形県" },
-  { id: 7, name: "福島県" },
-  { id: 8, name: "茨城県" },
-  { id: 9, name: "栃木県" },
-  { id: 10, name: "群馬県" },
-  { id: 11, name: "埼玉県" },
-  { id: 12, name: "千葉県" },
-  { id: 13, name: "東京都" },
-  { id: 14, name: "神奈川県" },
-  { id: 15, name: "新潟県" },
-  { id: 16, name: "富山県" },
-  { id: 17, name: "石川県" },
-  { id: 18, name: "福井県" },
-  { id: 19, name: "山梨県" },
-  { id: 20, name: "長野県" },
-  { id: 21, name: "岐阜県" },
-  { id: 22, name: "静岡県" },
-  { id: 23, name: "愛知県" },
-  { id: 24, name: "三重県" },
-  { id: 25, name: "滋賀県" },
-  { id: 26, name: "京都府" },
-  { id: 27, name: "大阪府" },
-  { id: 28, name: "兵庫県" },
-  { id: 29, name: "奈良県" },
-  { id: 30, name: "和歌山県" },
-  { id: 31, name: "鳥取県" },
-  { id: 32, name: "島根県" },
-  { id: 33, name: "岡山県" },
-  { id: 34, name: "広島県" },
-  { id: 35, name: "山口県" },
-  { id: 36, name: "徳島県" },
-  { id: 37, name: "香川県" },
-  { id: 38, name: "愛媛県" },
-  { id: 39, name: "高知県" },
-  { id: 40, name: "福岡県" },
-  { id: 41, name: "佐賀県" },
-  { id: 42, name: "長崎県" },
-  { id: 43, name: "熊本県" },
-  { id: 44, name: "大分県" },
-  { id: 45, name: "宮崎県" },
-  { id: 46, name: "鹿児島県" },
-  { id: 47, name: "沖縄県" },
-];
+// 都道府県リストを格納する`ref`変数
+const prefectures = ref([])
 
-// フィードバックメッセージ（登録や更新の結果を表示）
-const message = ref("");
+// フィードバックメッセージを格納する`ref`変数
+const message = ref('')
 
-// フォーム送信処理
-const submitForm = async () => {
-  console.log(user); // 送信するデータの確認
+// ユーザー情報をリセットする関数
+const resetUser = () => {
+  // `Object.assign`を使って、ユーザーデータを初期状態にリセット
+  Object.assign(user, {
+    password: '1111', // パスワード
+    nickname: 'テスト用ニックネーム', // ニックネーム
+    name: 'テスト用名前', // 名前
+    kana: 'テスト用カナ', // カナ
+    birth: '', // 生年月日
+    sex: '', // 性別
+    tel: '09012345678', // 電話番号
+    email: 'test@ivy.co.jp', // メールアドレス
+    address1: 'テスト用住所１', // 住所1（市町村）
+    address2: 'テスト用住所２', // 住所2（番地や建物名）
+    post_code: '1234567', // 郵便番号
+    prefecture: '', // 都道府県ID
+    intro: 'テスト用自己紹介', // 自己紹介
+  })
+}
+
+// 都道府県データを取得する非同期関数
+const fetchPrefectures = async () => {
   try {
-    const payload = { ...user };
-    const endpoint = 'http://172.16.3.136:8000/api/register'; // サーバーのフルURLを指定
-    const response = await axios.post(endpoint, payload);  // サーバーにHTTP POSTリクエストを送信
-    message.value = response.data.message || "新規登録が完了しました。";
+    // APIを使って都道府県リストを取得
+    const response = await apiClient.get('/prefectures')
+    prefectures.value = response.data // 取得した都道府県データを`prefectures`に格納
   } catch (error) {
-    // エラー時にレスポンスエラーの詳細をログに出力
-    if (error.response) {
-      console.error("APIエラーの詳細:", error.response.data);
-      console.error("ステータスコード:", error.response.status);
-      console.error("ヘッダー:", error.response.headers);
-    } else {
-      console.error("リクエストエラー:", error.message);
-    }
-    message.value = "新規登録に失敗しました。";
+    // エラーが発生した場合
+    console.error('都道府県データの取得に失敗しました:', error)
+    message.value = '都道府県データの取得に失敗しました。' // ユーザー向けメッセージ
   }
-};
+}
+
+// フォーム送信処理の非同期関数
+const submitForm = async () => {
+  // 送信時にユーザーデータをコンソールに表示（デバッグ用）
+  console.log('送信時のユーザーデータ:', JSON.parse(JSON.stringify(user)))
+
+  try {
+    // 送信するデータ（ユーザーの情報を`payload`にまとめる）
+    const payload = {
+      password: user.password,
+      nickname: user.nickname,
+      name: user.name,
+      kana: user.kana,
+      birth: user.birth,
+      sex: user.sex,
+      tel: user.tel,
+      email: user.email,
+      address1: user.address1,
+      address2: user.address2,
+      post_code: user.post_code,
+      pref_id: user.prefecture,
+      intro: user.intro,
+    }
+
+    // `POST`リクエストを使ってデータを送信
+    const response = await apiClient.post('/users', payload)
+
+    // 送信が成功した場合、メッセージを設定
+    message.value = response.data.message || '登録が成功しました！'
+    resetUser() // 登録後、フォームの内容をリセット
+  } catch (error) {
+    // 送信中にエラーが発生した場合
+    console.error('登録処理中にエラーが発生しました:', error)
+    message.value = '登録に失敗しました。入力内容を確認してください。' // エラーメッセージを設定
+  }
+}
+
+// コンポーネントがマウントされた際に呼ばれる処理
+onMounted(() => {
+  resetUser() // ユーザーデータの初期化
+  fetchPrefectures() // 都道府県リストを取得
+})
 </script>
 
 <template>
   <!-- 写真アップロードコンポーネント -->
-  <PhotoUploader />
+  <!-- <PhotoUploader /> -->
 
   <div class="mypage-container">
-    <!-- ページタイトルをログイン状態によって切り替え -->
     <h1>新規登録</h1>
 
-    <!-- フォーム開始 -->
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm" autocomplete="off">
       <!-- メールアドレス -->
       <div class="form-group">
         <label for="email">メールアドレス</label>
-        <input type="email" id="email" v-model="user.email" placeholder="メールアドレスを入力してください" />
+        <input type="email" id="email" v-model="user.email" placeholder="メールアドレスを入力してください" required />
       </div>
 
       <!-- パスワード -->
       <div class="form-group">
         <label for="password">パスワード</label>
-        <input type="password" id="password" v-model="user.password" placeholder="パスワードを入力してください" />
+        <input type="password" id="password" v-model="user.password" placeholder="パスワードを入力してください" required />
       </div>
 
       <!-- 確認用パスワード -->
       <div class="form-group">
         <label for="confirm-password">パスワード確認</label>
-        <input type="password" id="confirm-password" v-model="user.confirmPassword" placeholder="確認用パスワードを入力してください" />
+        <input type="password" id="confirm-password" v-model="user.confirmPassword" placeholder="確認用パスワードを入力してください"
+          required />
       </div>
 
       <!-- ニックネーム -->
       <div class="form-group">
         <label for="nickname">ニックネーム</label>
-        <input type="text" id="nickname" v-model="user.nickname" placeholder="ニックネームを入力してください" />
+        <input type="text" id="nickname" v-model="user.nickname" placeholder="ニックネームを入力してください" required />
       </div>
 
       <!-- 名前 -->
       <div class="form-group">
         <label for="name">名前</label>
-        <input type="text" id="name" v-model="user.name" placeholder="名前を入力してください" />
+        <input type="text" id="name" v-model="user.name" placeholder="名前を入力してください" required />
       </div>
 
       <!-- カナ -->
       <div class="form-group">
         <label for="kana">カナ</label>
-        <input type="text" id="kana" v-model="user.kana" placeholder="カナを入力してください" />
+        <input type="text" id="kana" v-model="user.kana" placeholder="カナを入力してください" required />
       </div>
 
       <!-- 生年月日 -->
       <div class="form-group">
         <label for="birth">生年月日</label>
-        <input type="date" id="birth" v-model="user.birth" />
+        <input type="date" id="birth" v-model="user.birth" required />
       </div>
 
       <!-- 性別 -->
       <div class="form-group">
         <label for="sex">性別</label>
-        <select id="sex" v-model="user.sex">
+        <select id="sex" v-model="user.sex" required>
           <option value="" disabled>性別を選択してください</option>
           <option value="男性">男性</option>
           <option value="女性">女性</option>
@@ -161,23 +172,28 @@ const submitForm = async () => {
       <!-- 電話番号 -->
       <div class="form-group">
         <label for="tel">電話番号</label>
-        <input type="tel" id="tel" v-model="user.tel" placeholder="電話番号を入力してください" />
+        <input type="tel" id="tel" v-model="user.tel" placeholder="電話番号を入力してください" required />
       </div>
 
       <!-- 住所 -->
       <div class="form-group">
-        <label for="prefecture_id">都道府県</label>
-        <select id="prefecture_id" v-model="user.prefecture_id">
+        <label for="prefecture">都道府県</label>
+        <select id="prefecture" v-model="user.prefecture" required>
           <option value="" disabled>都道府県を選択してください</option>
-          <option v-for="pref in prefectures" :key="pref.id" :value="pref.id">
-            {{ pref.name }}
+          <option v-for="pref in prefectures" :key="pref.pref_id" :value="pref.pref_id">
+            {{ pref.pref }}
           </option>
         </select>
       </div>
 
       <div class="form-group">
+        <label for="post-code">郵便番号</label>
+        <input type="text" id="post-code" v-model="user.post_code" placeholder="郵便番号を入力してください" required />
+      </div>
+
+      <div class="form-group">
         <label for="address1">住所1（市町村）</label>
-        <input type="text" id="address1" v-model="user.address1" placeholder="市町村を入力してください" />
+        <input type="text" id="address1" v-model="user.address1" placeholder="市町村を入力してください" required />
       </div>
 
       <div class="form-group">
@@ -195,14 +211,13 @@ const submitForm = async () => {
       <button type="submit">登録する</button>
     </form>
 
-    <!-- メッセージを表示 -->
     <p v-if="message" class="message">{{ message }}</p>
   </div>
 </template>
 
 <style scoped>
 .mypage-container {
-  font-family: "Zen Maru Gothic", serif;
+  font-family: 'Zen Maru Gothic', serif;
   max-width: auto;
   margin: 0 auto;
   padding: 20px;
@@ -233,7 +248,7 @@ label {
 input,
 select,
 textarea {
-  font-family: "Zen Maru Gothic", serif;
+  font-family: 'Zen Maru Gothic', serif;
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -241,7 +256,7 @@ textarea {
 }
 
 button {
-  font-family: "Zen Maru Gothic", serif;
+  font-family: 'Zen Maru Gothic', serif;
   background-color: #f7a400;
   color: white;
   border: none;
