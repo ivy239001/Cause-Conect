@@ -11,6 +11,7 @@ import Navi from './components/Nav.vue'; // ナビゲーションバーコンポ
       <!-- ここにページ遷移によって切り替わるコンテンツを表示 -->
       <router-view/> <!-- 遷移先のコンテンツが表示されます -->
     </div>
+
   </template>
 
   <style scoped>

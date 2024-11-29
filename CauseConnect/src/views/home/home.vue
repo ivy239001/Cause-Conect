@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';  // vue-routerをインポート
 import Search from '@/components/search.vue';
 import Japan from '@/components/japan.vue';
 import ImageSlide from '@/views/Home/Component/ImageSlide.vue';
+import Juggler from '@/components/Juggler.vue';
 
 // 検索クエリを保持するためのref
 const searchQuery = ref('');

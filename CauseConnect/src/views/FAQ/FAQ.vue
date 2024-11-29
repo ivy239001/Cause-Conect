@@ -17,6 +17,7 @@
 
 <script setup>
 // Vueからrefをインポート
+import Juggler from '@/components/Juggler.vue';
 import { ref } from 'vue';
 
 // FAQデータのリスト

@@ -5,6 +5,7 @@ import Sarch from '@/components/search.vue'; // 作成した router をインポ
 import './styles/button.css'; // グローバルに読み込む
 import RealTimeClock from './components/RealTimeClock.vue';
 import './assets/globalFont.css'//グローバルフォント統一;
+import Juggler from './components/Juggler.vue';//おまけ
 
 
 createApp(App)
