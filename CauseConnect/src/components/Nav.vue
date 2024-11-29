@@ -1,5 +1,6 @@
 <script>
 import RealTimeClock from './RealTimeClock.vue';
+import PointHistory from '@/views/Mypage/Component/PointHistory.vue';
 
 export default {
   name: "Navi",
@@ -33,10 +34,10 @@ export default {
   },
   components: {
     RealTimeClock,
+    PointHistory, // PointHistory コンポーネントをインポート
   },
 };
 </script>
-
 
 <template>
   <header class="nav">
@@ -82,20 +83,27 @@ export default {
 
     <RealTimeClock />
 
-
     <!-- 依頼するボタン -->
     <div>
       <button class="btn1" @click="goToToko">依頼する</button>
     </div>
   </header>
-      <!-- テスト用のログイン切り替えボタン -->
 
+  <!-- ポイント履歴（直接表示） -->
+  <div v-if="isLoggedIn" class="point-history">
+    <h3>現在の保有ポイント</h3>
+    <p>1000ポイント</p> <!-- 仮のポイント値 -->
+
+    <h3>ポイント履歴</h3>
+    <PointHistory /> <!-- ここでポイント履歴を直接表示 -->
+  </div>
+
+  <!-- テスト用のログイン切り替えボタン -->
   <div>
-      <button class="btn2" @click="toggleLogin">
-        {{ isLoggedIn ? "ログイン状態をオフにする" : "ログイン状態をオンにする" }}
-      </button>
-    </div>
-
+    <button class="btn2" @click="toggleLogin">
+      {{ isLoggedIn ? "ログイン状態をオフにする" : "ログイン状態をオンにする" }}
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -107,7 +115,7 @@ export default {
   background-color: #333;
   color: white;
   padding: 0.5rem 1rem;
-  flex-wrap: wrap; /* 必要に応じて折り返しを許容 */
+  flex-wrap: wrap;
 }
 
 /* ロゴのスタイル */
@@ -138,9 +146,9 @@ export default {
 
 /* 依頼するボタンのスタイル */
 div {
-  display: inline-flex; /* ボタンが横に並ぶように変更 */
+  display: inline-flex;
   align-items: center;
-  gap: 10px; /* ボタン間の余白を調整 */
+  gap: 10px;
 }
 
 div button {
@@ -173,10 +181,29 @@ div button:hover {
   background-color: #0056b3;
 }
 
+/* ポイント履歴のスタイル */
+.point-history {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.point-history h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.point-history p {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
   .nav {
-    flex-direction: column; /* 狭い画面では縦並び */
+    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -186,7 +213,7 @@ div button:hover {
   }
 
   div {
-    flex-direction: column; /* ボタンも縦に並ぶ */
+    flex-direction: column;
   }
 }
 </style>
