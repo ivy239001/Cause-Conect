@@ -1,37 +1,3 @@
-<template>
-  <div class="search-container">
-    <div class="search-row">
-      <div class="search-item">
-        <select id="prefecture" v-model="selectedPrefecture">
-          <option value="" disabled selected hidden>都道府県▼</option>
-          <option v-for="(pref, index) in prefectures" :key="index" :value="pref">
-            {{ pref }}
-          </option>
-        </select>
-      </div>
-      <div class="search-item">
-        <select id="area" v-model="selectedArea">
-          <option value="" disabled selected hidden>活動エリア▼</option>
-          <option v-for="(area, index) in areas" :key="index" :value="area">
-            {{ area }}
-          </option>
-        </select>
-      </div>
-      <div class="search-item">
-        <select id="status" v-model="selectedStatus">
-          <option value="" disabled selected hidden>募集状況▼</option>
-          <option value="募集中">募集中</option>
-          <option value="募集終了">募集終了</option>
-          <option value="すべて">すべて</option>
-        </select>
-      </div>
-      <div class="search-item">
-        <button @click="navigateToList">検索</button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   data() {
@@ -67,12 +33,46 @@ export default {
 };
 </script>
 
+<template>
+  <div class="search-container">
+    <div class="search-row">
+      <div class="search-item">
+        <select id="prefecture" v-model="selectedPrefecture">
+          <option value="" disabled selected hidden>都道府県▼</option>
+          <option v-for="(pref, index) in prefectures" :key="index" :value="pref">
+            {{ pref }}
+          </option>
+        </select>
+      </div>
+      <div class="search-item">
+        <select id="area" v-model="selectedArea">
+          <option value="" disabled selected hidden>活動エリア▼</option>
+          <option v-for="(area, index) in areas" :key="index" :value="area">
+            {{ area }}
+          </option>
+        </select>
+      </div>
+      <div class="search-item">
+        <select id="status" v-model="selectedStatus">
+          <option value="" disabled selected hidden>募集状況▼</option>
+          <option value="募集中">募集中</option>
+          <option value="募集終了">募集終了</option>
+          <option value="すべて">すべて</option>
+        </select>
+      </div>
+      <div class="search-item">
+        <button  @click="navigateToList">検索</button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped>
 .search-container {
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 100px auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 8px;
 }
 
@@ -107,6 +107,7 @@ export default {
   /* ブラウザのデフォルトスタイルを無効化 */
   font-size: 25px;
   text-align: center;
+  box-shadow: 2px 2px #ccc;
 }
 
 .search-item select option {
@@ -127,6 +128,8 @@ export default {
   border-radius: 4px;
   font-size: 25px;
   text-align: center;
+  box-shadow: 2px 2px #ccc;
+
 }
 
 .search-item button:hover {
