@@ -1,7 +1,7 @@
 <script setup>
 import RequestList from "./components/RequestList.vue"; // RequestListコンポーネントをインポート
 import Refine from "./components/Refine.vue"; // フィルターコンポーネントをインポート
-
+import search from "@/components/search.vue";
 import { ref } from "vue";
 
 // ローディング状態を管理
@@ -34,6 +34,7 @@ const resetFilters = () => {
 </script>
 
 <template>
+  <search/>
   <div class="list-page">
     <div class="list-container">
       <!-- 左側: フィルター -->
@@ -64,6 +65,13 @@ const resetFilters = () => {
 </template>
 
 <style scoped>
+.search-container{
+  width: 50%;
+  margin-right: 190px;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding: 0%;
+}
 .btn1{
   color: #333;
 }
@@ -77,7 +85,6 @@ const resetFilters = () => {
 .refine-sidebar {
   width: 300px;
   flex-shrink: 0;
-  border-right: 1px solid #ccc;
 }
 
 

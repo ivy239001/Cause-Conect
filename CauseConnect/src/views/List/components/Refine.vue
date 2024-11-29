@@ -1,3 +1,29 @@
+<script>
+export default {
+  data() {
+    return {
+      filters: {
+        keyword: "", // フリーワード
+        status: [], // 募集状況（複数選択）
+        area: [], // 活動エリア（複数選択）
+        theme: [], // 活動テーマ（複数選択）
+        age: [], // 推奨年齢（複数選択）
+        feature: [], // 特徴（複数選択）
+      },
+      areas: ["道路", "山", "川", "海", "公園", "その他"],
+      themes: ["地域美化"], // 活動テーマは「地域美化」のみ
+    };
+  },
+  methods: {
+    handleSearch() {
+      console.log("検索条件:", this.filters);
+      // ここでフィルタリング処理を実行することができます
+      this.$emit('apply-filters', { ...this.filters });
+    },
+  },
+};
+</script>
+
 <template>
   <div class="refine-container">
     <h1>詳細検索</h1>
@@ -85,32 +111,6 @@
     </form>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      filters: {
-        keyword: "", // フリーワード
-        status: [], // 募集状況（複数選択）
-        area: [], // 活動エリア（複数選択）
-        theme: [], // 活動テーマ（複数選択）
-        age: [], // 推奨年齢（複数選択）
-        feature: [], // 特徴（複数選択）
-      },
-      areas: ["道路", "山", "川", "海", "公園", "その他"],
-      themes: ["地域美化"], // 活動テーマは「地域美化」のみ
-    };
-  },
-  methods: {
-    handleSearch() {
-      console.log("検索条件:", this.filters);
-      // ここでフィルタリング処理を実行することができます
-      this.$emit('apply-filters', { ...this.filters });
-    },
-  },
-};
-</script>
 
 <style scoped>
 .refine-container {

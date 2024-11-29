@@ -82,7 +82,7 @@ export default {
 
 .search-row {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-around;
   align-items: center;
   gap: 20px;
 }

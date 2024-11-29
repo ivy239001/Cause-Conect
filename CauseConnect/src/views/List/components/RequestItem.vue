@@ -25,7 +25,7 @@ import FavoriteIcon from "@/components/FavoriteIcon.vue";
     <!-- 右側に依頼情報を表示 -->
     <div class="request-info">
       <h3>{{ request.name }}</h3>
-      
+
       <p><strong>日付:</strong> {{ request.date }}</p>
       <p><strong>場所:</strong> {{ request.location }}</p>
       <p><strong>活動内容:</strong> {{ request.description }}</p>
