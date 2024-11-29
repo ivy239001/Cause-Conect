@@ -1,121 +1,70 @@
-<script>
+<script setup>
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
-import RequestItem from "@/views/List/components/RequestItem.vue"; // RequestItemコンポーネントをインポート
+import RequestItem from "./ImageSlideItem.vue"; // RequestItemコンポーネントをインポート
 
-export default {
-  name: "ImageSlide",
-  components: {
-    RequestItem,
-  },
-  setup() {
-    // サンプル依頼データ
-    const requests = reactive([
-      {
-        id: 1,
-        name: "地域美化活動",
-        description: "地域の公園を掃除する活動です。",
-        date: "2024-12-01",
-        location: "東京都渋谷区",
-      },
-      {
-        id: 2,
-        name: "川の清掃",
-        description: "河川敷のゴミ拾い活動を行います。",
-        date: "2024-12-15",
-        location: "神奈川県横浜市",
-      },
-      {
-        id: 3,
-        name: "山のトレイル整備",
-        description: "登山道の整備活動です。",
-        date: "2024-12-20",
-        location: "長野県松本市",
-      },
-      {
-        id: 4,
-        name: "森林保護活動",
-        description: "森林の保護を目的とした活動です。",
-        date: "2024-12-25",
-        location: "北海道札幌市",
-      },
-      {
-        id: 5,
-        name: "海岸清掃",
-        description: "海岸のゴミ拾い活動です。",
-        date: "2025-01-01",
-        location: "沖縄県那覇市",
-      },
-      {
-        id: 6,
-        name: "空港周辺清掃",
-        description: "空港周辺の清掃活動を行います。",
-        date: "2025-01-10",
-        location: "大阪府大阪市",
-      },
-    ]);
+// サンプル依頼データ
+const requests = reactive([
+  { id: 1, name: "地域美化活動", description: "地域の公園を掃除する活動です。", date: "2024-12-01", location: "東京都渋谷区" },
+  { id: 2, name: "川の清掃", description: "河川敷のゴミ拾い活動を行います。", date: "2024-12-15", location: "神奈川県横浜市" },
+  { id: 3, name: "山のトレイル整備", description: "登山道の整備活動です。", date: "2024-12-20", location: "長野県松本市" },
+  { id: 4, name: "森林保護活動", description: "森林の保護を目的とした活動です。", date: "2024-12-25", location: "北海道札幌市" },
+  { id: 5, name: "海岸清掃", description: "海岸のゴミ拾い活動です。", date: "2025-01-01", location: "沖縄県那覇市" },
+  { id: 6, name: "空港周辺清掃", description: "空港周辺の清掃活動を行います。", date: "2025-01-10", location: "大阪府大阪市" },
+]);
 
-    // スライド管理用データ
-    const currentSlide = ref(0); // 現在のスライド位置
-    const slideWidth = ref(600); // 1つのスライドの幅（300pxに調整）
-    const gap = 20; // スライド間の余白
-    const slideWidthWithGap = ref(slideWidth.value + gap); // 幅 + 余白
-    const visibleSlides = 6; // 表示するスライド数を6に設定
+// スライド管理用データ
+const currentSlide = ref(0); // 現在のスライド位置
+const slideWidth = ref(300); // 1つのスライドの幅（300pxに調整）
+const gap = 20; // スライド間の余白
+const slideWidthWithGap = ref(slideWidth.value + gap); // 幅 + 余白
+const visibleSlides = 3; // 表示するスライド数を3に設定
 
-    // スライドスタイル計算
-    const imageWrapperStyle = reactive({
-      transform: `translateX(-${currentSlide.value * slideWidthWithGap.value}px)`,
-      transition: "transform 0.5s ease-in-out",
-    });
+// スライドスタイル計算
+const imageWrapperStyle = reactive({
+  transform: `translateX(-${currentSlide.value * slideWidthWithGap.value}px)`,
+  transition: "transform 0.5s ease-in-out",
+});
 
-    // スライド操作
-    const prevSlide = () => {
-      currentSlide.value =
-        (currentSlide.value - 1 + requests.length) % requests.length;
-      updateSlideStyle();
-    };
-
-    const nextSlide = () => {
-      currentSlide.value = (currentSlide.value + 1) % requests.length;
-      updateSlideStyle();
-    };
-
-    // スライド幅の更新
-    const setSlideWidth = () => {
-      const availableWidth = window.innerWidth;
-      const maxSlideWidth = Math.min(availableWidth / visibleSlides - gap, 500); // 幅を広げるために最大を500pxに設定
-      slideWidth.value = maxSlideWidth; // 各スライドの幅を調整
-      slideWidthWithGap.value = slideWidth.value + gap;
-      updateSlideStyle();
-    };
-
-    // スライドスタイルの更新
-    const updateSlideStyle = () => {
-      imageWrapperStyle.transform = `translateX(-${
-        currentSlide.value * slideWidthWithGap.value
-      }px)`;
-    };
-
-    // マウント時のイベントリスナー設定
-    onMounted(() => {
-      setSlideWidth(); // 初期設定
-      window.addEventListener("resize", setSlideWidth); // リサイズイベントでスライド幅更新
-    });
-
-    // アンマウント時のクリーンアップ
-    onBeforeUnmount(() => {
-      window.removeEventListener("resize", setSlideWidth); // イベントリスナー削除
-    });
-
-    return {
-      requests,
-      currentSlide,
-      slideWidth,
-      imageWrapperStyle,
-      prevSlide,
-      nextSlide,
-    };
-  },
+// スライド操作
+const prevSlide = () => {
+  // 3回のスライドごとに最初に戻るように変更
+  currentSlide.value =
+    (currentSlide.value - 1 + visibleSlides) % visibleSlides;
+  updateSlideStyle();
 };
+
+const nextSlide = () => {
+  // 3回のスライドごとに最初に戻るように変更
+  currentSlide.value = (currentSlide.value + 1) % visibleSlides;
+  updateSlideStyle();
+};
+
+// スライド幅の更新
+const setSlideWidth = () => {
+  const availableWidth = window.innerWidth;
+  const maxSlideWidth = Math.min(availableWidth / visibleSlides - gap, 500); // 幅を広げるために最大を500pxに設定
+  slideWidth.value = maxSlideWidth; // 各スライドの幅を調整
+  slideWidthWithGap.value = slideWidth.value + gap;
+  updateSlideStyle();
+};
+
+// スライドスタイルの更新
+const updateSlideStyle = () => {
+  imageWrapperStyle.transform = `translateX(-${
+    currentSlide.value * slideWidthWithGap.value
+  }px)`;
+};
+
+// マウント時のイベントリスナー設定
+onMounted(() => {
+  setSlideWidth(); // 初期設定
+  window.addEventListener("resize", setSlideWidth); // リサイズイベントでスライド幅更新
+});
+
+// アンマウント時のクリーンアップ
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", setSlideWidth); // イベントリスナー削除
+});
 </script>
 
 <template>
@@ -138,10 +87,6 @@ export default {
 </template>
 
 <style scoped>
-.request-item {
-  width: 300px !important;
-  margin: 20px;
-}
 .carousel-container {
   position: relative;
   width: 100%;
@@ -150,7 +95,6 @@ export default {
 }
 
 .carousel-wrapper {
-  width: 6000px;
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
@@ -178,5 +122,9 @@ button:hover {
 
 .next {
   right: 10px;
+}
+.carousel-wrapper {
+  width: 2000px !important; /* 6つ表示で画面サイズ100%のときしか対応できていない */
+  margin: 20px;
 }
 </style>
