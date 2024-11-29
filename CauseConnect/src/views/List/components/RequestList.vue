@@ -30,13 +30,13 @@ const requests = ref([
 
 <template>
   <div class="request-list">
-    <h1>依頼リスト</h1>
     <!-- 依頼リストを表示 -->
     <div>
       <RequestItem
         v-for="request in requests"
         :key="request.id"
         :request="request"
+        class="request-item"
       />
     </div>
   </div>
@@ -44,11 +44,16 @@ const requests = ref([
 
 <style scoped>
 .request-list {
-  padding: 20px;
+  margin-left: 20px;
+  margin-right: -10px;
+}
+.request-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.request-item:hover {
+  transform: translateX(-10px) scale(1.05); /* 左に移動して拡大 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつけて強調 */
 }
+
 </style>
