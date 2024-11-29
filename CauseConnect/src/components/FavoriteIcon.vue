@@ -27,7 +27,7 @@ const toggleFavorite = () => {
 }
 
 .favorite-icon .filled {
-  color: gold; /* 塗りつぶされた星の色（ゴールド） */
+  color: #ff8c00; /* 塗りつぶされた星の色（ゴールド） */
 }
 
 .favorite-icon .empty {
