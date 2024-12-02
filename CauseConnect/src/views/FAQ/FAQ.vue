@@ -9,30 +9,31 @@
       </div>
       <!-- アコーディオン式で答えを表示 -->
       <div class="faq-answer" v-show="activeIndex === index">
-        <p>{{ item.answer }}</p>
+        <!-- 改行を安全に処理 -->
+        <p v-html="formatAnswer(item.answer)"></p>
       </div>
     </div>
   </div>
 </template>
 
+
 <script setup>
-// Vueからrefをインポート
-import Juggler from '@/components/Juggler.vue';
 import { ref } from 'vue';
+import DOMPurify from 'dompurify';
 
 // FAQデータのリスト
 const faqList = [
   {
     question: "アカウントの作成方法は？",
-    answer: "アカウントはトップページから「登録」ボタンをクリックして、必要な情報を入力することで作成できます。",
+    answer: "アカウントはトップページから「登録」ボタンをクリックして、\n必要な情報を入力することで作成できます。",
   },
   {
     question: "パスワードを忘れた場合どうすればいいですか？",
-    answer: "ログイン画面で「パスワードを忘れた場合」をクリックし、登録したメールアドレスを入力してください。リセットリンクをお送りいたします。",
+    answer: "ログイン画面で「パスワードを忘れた場合」をクリックし、\n登録したメールアドレスを入力してください。リセットリンクをお送りいたします。",
   },
   {
     question: "料金はどのように支払うのですか？",
-    answer: "クレジットカードや銀行振込など、いくつかの支払い方法をご用意しています。詳細は支払いページをご確認ください。",
+    answer: "クレジットカードや銀行振込など、\nいくつかの支払い方法をご用意しています。詳細は支払いページをご確認ください。",
   },
 ];
 
@@ -41,16 +42,24 @@ const activeIndex = ref(null);
 
 // 質問のクリック時に答えの表示を切り替える関数
 function toggleAnswer(index) {
-  // 既に開いている項目がクリックされた場合は閉じる、それ以外の項目は開く
   activeIndex.value = activeIndex.value === index ? null : index;
 }
+
+// 答えのフォーマットを処理しつつサニタイズ
+function formatAnswer(text) {
+  // 改行文字を安全にHTMLの <br> タグに変換
+  const safeHtml = DOMPurify.sanitize(text.replace(/\n/g, '<br>'));
+  return safeHtml;
+}
 </script>
+
 
 <style scoped>
 .faq-container {
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  background-color: #f4f4f4;
 }
 
 .faq-title {
@@ -73,12 +82,12 @@ function toggleAnswer(index) {
   font-weight: bold;
   cursor: pointer;
   padding: 10px;
-  background-color: #f7f7f7;
+  background-color: #f4f4f4;
   border-radius: 5px;
 }
 
 .faq-question:hover {
-  background-color: #e7e7e7;
+  background-color: #ff8c00;
 }
 
 .arrow {
@@ -92,7 +101,7 @@ function toggleAnswer(index) {
 
 .faq-answer {
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: #ffca5f;
   border-radius: 5px;
   margin-top: 10px;
 }
