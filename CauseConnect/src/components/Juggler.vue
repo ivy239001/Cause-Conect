@@ -1,16 +1,16 @@
 <script>
+import image1 from '@/assets/img/Juggler/1.png';
+import image2 from '@/assets/img/Juggler/2.png';
+import image3 from '@/assets/img/Juggler/3.png';
+import image4 from '@/assets/img/Juggler/4.png';
+import image5 from '@/assets/img/Juggler/5.png';
+import image6 from '@/assets/img/Juggler/6.png';
+import image7 from '@/assets/img/Juggler/7.png';
+
 export default {
   data() {
     return {
-      images: [
-        require('@/assets/img/Juggler/1.png'),
-        require('@/assets/img/Juggler/2.png'),
-        require('@/assets/img/Juggler/3.png'),
-        require('@/assets/img/Juggler/4.png'),
-        require('@/assets/img/Juggler/5.png'),
-        require('@/assets/img/Juggler/6.png'),
-        require('@/assets/img/Juggler/7.png'),
-      ],
+      images: [image1, image2, image3, image4, image5, image6, image7],
       leftImage: '',
       centerImage: '',
       rightImage: '',
@@ -49,7 +49,6 @@ export default {
 <style scoped>
 .gamen {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 20px;
 }

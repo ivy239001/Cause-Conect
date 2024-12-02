@@ -33,6 +33,7 @@ const searchRequests = () => {
       <h1>ホームページ</h1>
       <p>ここにはホームページのコンテンツが表示されます。</p>
     </div>
+    <Juggler/>
   </div>
 </template>
 
