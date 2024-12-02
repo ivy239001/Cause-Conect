@@ -30,8 +30,8 @@ const searchRequests = () => {
     <Japan/>
     <ImageSlide/>
     <div>
-      <h1>ホームページ</h1>
-      <p>ここにはホームページのコンテンツが表示されます。</p>
+      <h1>おまけコーナー</h1>
+      <p>ここにはマル秘コンテンツが表示されています。</p>
     </div>
     <Juggler/>
   </div>
