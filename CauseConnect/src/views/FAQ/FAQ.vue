@@ -1,22 +1,3 @@
-<template>
-  <div class="faq-container">
-    <h2 class="faq-title">よくある質問 (FAQ)</h2>
-    <div class="faq-item" v-for="(item, index) in faqList" :key="index">
-      <div class="faq-question" @click="toggleAnswer(index)">
-        <span>{{ item.question }}</span>
-        <!-- 矢印の動きと表示 -->
-        <span class="arrow" :class="{ open: activeIndex === index }">&#9660;</span>
-      </div>
-      <!-- アコーディオン式で答えを表示 -->
-      <div class="faq-answer" v-show="activeIndex === index">
-        <!-- 改行を安全に処理 -->
-        <p v-html="formatAnswer(item.answer)"></p>
-      </div>
-    </div>
-  </div>
-</template>
-
-
 <script setup>
 import { ref } from 'vue';
 import DOMPurify from 'dompurify';
@@ -53,6 +34,23 @@ function formatAnswer(text) {
 }
 </script>
 
+<template>
+  <div class="faq-container">
+    <h2 class="faq-title">よくある質問 (FAQ)</h2>
+    <div class="faq-item" v-for="(item, index) in faqList" :key="index">
+      <div class="faq-question" @click="toggleAnswer(index)">
+        <span>{{ item.question }}</span>
+        <!-- 矢印の動きと表示 -->
+        <span class="arrow" :class="{ open: activeIndex === index }">&#9660;</span>
+      </div>
+      <!-- アコーディオン式で答えを表示 -->
+      <div class="faq-answer" v-show="activeIndex === index">
+        <!-- 改行を安全に処理 -->
+        <p v-html="formatAnswer(item.answer)"></p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .faq-container {
